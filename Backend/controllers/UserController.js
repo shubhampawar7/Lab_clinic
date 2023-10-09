@@ -3,11 +3,9 @@ const bcrypt=require("bcrypt")
 const mongoose = require('mongoose');
 const nodemailer=require("nodemailer")
 const jwt =require("jsonwebtoken")
-const config=require("../config/config")
 const Information = require("../models/Information")
 const Feedback = require('../models/Feedback')
-
-
+require('dotenv').config();
 
 const path = require('path');
 const download = require('download');
@@ -84,12 +82,13 @@ const sendverifyMail=async(name,email,user_id)=>{
             port: 587,
             secure: false, // true for 465, false for other ports
             auth: {
-                user: config.email,
-                pass: config.Password
+                
+                user: process.env.EMAIL,
+                pass: process.env.PASSWORD
             },
         });
         const mailOptions={
-            from:config.email,
+            from:process.env.EMAIL,
             to:email,
             subject:"For verification mail ",
             // html: `<h1>Hi ,`+name+`</h1><p>please click here to verify <a href="http://127.0.0.1:7000/verify?id=`+user_id+`" >your mail</a></p>`
@@ -317,12 +316,12 @@ const forgotPasswordMail=async(name,email,token)=>{
             port: 587,
             secure: false, // true for 465, false for other ports
             auth: {
-                user: config.email,
-                pass: config.Password
+                user: process.env.EMAIL,
+                pass: process.env.PASSWORD
             },
         });
         const mailOptions={
-            from:config.email,
+            from:process.env.EMAIL,
             to: "pshubham7000@gmail.com",
             subject:"For reset password ",
             // html: `<h1>Hi ,`+name+`</h1><p>please click here to verify <a href="http://127.0.0.1:7000/verify?id=`+user_id+`" >your mail</a></p>`

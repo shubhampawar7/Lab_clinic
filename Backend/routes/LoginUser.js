@@ -2,11 +2,11 @@ const express = require("express");
 const router = express.Router();
 const Feedback = require("../models/Feedback")
 const session = require("express-session")
-const config = require("../config/config")
 const auth = require("../middlewares/auth")
 const multer = require("multer");
 const fs = require("fs");
 const nodemailer = require("nodemailer")
+require('dotenv').config();
 
 
 
@@ -28,12 +28,12 @@ router.post('/send-email', (req, res) => {
         port: 587,
         secure: false,
         auth: {
-            user: config.email,
-            pass: config.Password
+            user: process.env.EMAIL,
+            pass: process.env.PASSWORD
         },
     });
     const mailOptions = {
-        from: config.email,
+        from: process.env.EMAIL,
         to: email,
         subject: subject,
         html: message +"Thank you for considering Sunrise Diagnostics & Speciality Lab for your diagnostic needs. We value your interest and are here to assist you in any way we can. If you have any questions, require assistance, or would like to book an appointment, please don't hesitate to get in touch with us.Contact Information: Phone: +91 95524 47349  Email:sunrised2017@gmail.com",
