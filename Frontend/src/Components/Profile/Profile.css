@@ -1,0 +1,94 @@
+.profileSection{
+    background-color: #e1f1f3;
+    display: flex;
+    width: 100%;
+}
+.container{
+    margin: 2rem 0;
+}
+.profileMainContent{
+    width: 83%;
+    padding: 0.7rem;
+    margin-left: 0.4rem;
+
+}
+.officeTimingsRow{
+  /* padding: ; */
+}
+.profileForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.ProfileTable{
+    margin-left: 240px;
+}
+
+.ProfileTable h4{
+    margin-top: 20px;
+    margin-left: 40px;
+    width: 1300px;
+}
+.ProfileTableDetails{
+    background-color: white;
+    margin-top: 60px;
+    margin-left: 40px;
+    border-radius: 5px;
+    margin-right: 40px;
+}
+.ProfileTableDetails p{
+    padding: 20px;
+    font-weight: 900;
+    background: linear-gradient(#19D3AE, #0FCFEC);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.form-container {
+    width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+    width: 50%;
+    overflow: auto;
+  }
+  
+  .form-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .form-control:focus {
+    border-color: #4285f4;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .form-submit {
+    background-color: #4285f4;
+    color: #fff;
+    padding: 10px 15px;
+    border: 1px solid #4285f4;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .form-submit:hover {
+    background-color: #3977f2;
+  }
+  
+  

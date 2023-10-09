@@ -1,0 +1,81 @@
+import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClock } from '@fortawesome/free-regular-svg-icons';
+import { faMapMarkerAlt, faPhoneAlt, faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
+import Lab1 from "../../images/Lab1.png";
+import Lab2 from "../../images/Lab2.png";
+import Lab3 from "../../images/Lab3.png";
+import "./Services.css"
+
+
+
+
+ const Services = ({profileInformation}) => {
+    const handleLocationClick = () => {
+        // Create a URL with the location query parameter
+        const locationQuery = encodeURIComponent('Kharadi, Pune'); // Replace with the desired location
+        const mapUrl = `https://www.google.com/maps/search/?q=${locationQuery}`;
+
+        // Redirect to the map URL
+        window.location.href = mapUrl;
+    };
+    return (
+        <>
+            <div className="publicServices">
+                <div>
+                    <FontAwesomeIcon className="icon" icon={faClock} />
+                    <div>
+                        <p>Opening Hours</p>
+                        <small>
+                            MON - SAT [ 08:00 Am –  09:30 Pm ]
+                            <br />
+                            SUN [ 08:00 Am –  02:00 Pm ]
+
+
+                        </small>
+                    </div>
+                </div>
+                <div style={{ cursor: "pointer" }} onClick={handleLocationClick}>
+                    <FontAwesomeIcon className="icon" icon={faMapMarkerAlt} />
+                    <div>
+                        <p>Visit our location</p>
+                        <small>pune</small>
+                    </div>
+                </div>
+                <div>
+                    <FontAwesomeIcon className="icon" icon={faPhoneAlt} />
+                    <div>
+                        <p>Contact us now</p>
+                        <small>+91 {profileInformation[0]?.phone}</small><br></br>
+                        <small>{profileInformation[0]?.email}</small>
+
+                    </div>
+                </div>
+            </div>
+            <div className="ourServices">
+                <div>
+                    <p>OUR SERVICES</p>
+                    <h2>Services We Provide</h2>
+                    <div className="servicesDetails">
+                        <div className='testCards'>
+                            <img src={Lab1} alt="" />
+                            <p>Blood Test</p>
+                            <p>Cupidatat laborum qui excepteur anim magna occaecat veniam et consequat ad eiusmod et incididunt. Occaecat nisi amet eiusmod elit. Est culpa culpa nisi excepteur duis ad duis mollit.</p>
+                        </div>
+                        <div className='testCards'>
+                            <img src={Lab2} alt="" />
+                            <p>Bone</p>
+                            <p>Cupidatat laborum qui excepteur anim magna occaecat veniam et consequat ad eiusmod et incididunt. Occaecat nisi amet eiusmod elit. Est culpa culpa nisi excepteur duis ad duis mollit.</p>
+                        </div>
+                        <div className='testCards'>
+                            <img src={Lab3} alt="" />
+                            <p>Kidney</p>
+                            <p>Cupidatat laborum qui excepteur anim magna occaecat veniam et consequat ad eiusmod et incididunt. Occaecat nisi amet eiusmod elit. Est culpa culpa nisi excepteur duis ad duis mollit.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+}
+export default Services;

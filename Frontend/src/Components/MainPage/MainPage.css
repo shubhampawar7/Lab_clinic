@@ -1,0 +1,789 @@
+.doctorNav {
+    /* padding-top: 80px; */
+    margin-right: 2rem;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Navbar {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.appoinmentContent {
+
+}
+
+.appoinmentHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
+
+}
+
+.appoinmentHeading {
+    text-align: center;
+}
+
+.navbarIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1.5rem 0rem 0rem 7rem;
+}
+
+.SunriseIcon {
+    width: 10rem;
+    height: 8rem;
+}
+
+.navLink {
+    padding: 0px 30px;
+    text-decoration: none;
+    color: rgb(210, 210, 210);
+    font-size: large;
+}
+
+.doctorText {
+    margin-top: 80px;
+    margin-left: 100px;
+    font-weight: 700;
+}
+
+.doctorText p {
+    color: gray;
+}
+
+.doctorHeading {
+    background: gray 40%;
+    background-image: linear-gradient(to left, #1b1b1b 0%, #ffffffd5 50%), url(../../images/Mask\ Group\ 1.png);
+    width: 100%;
+    height: 800px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.doctorImg img {
+    width: 42rem;
+    height: 30rem;
+    padding-top: 80px;
+    padding-left: 100px;
+}
+
+.aboutUsHeading {
+    text-align: center;
+}
+
+.doctorText .button,
+.doctorPortal .dentalCare .button,
+.doctorPortal .makeAppointment .button {
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    background-image: linear-gradient(to right, #19D3AE, #0FCFEC);
+    color: white;
+    font-weight: 700;
+    border-radius: 2px;
+}
+
+.doctorPortal .publicServices {
+    display: flex;
+    justify-content: center;
+    margin-top: -80px;
+}
+
+.doctorPortal .publicServices>* {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #414141;
+    border-radius: 5px;
+    color: white;
+    margin: 0px 10px;
+    width: 400px;
+    height: 150px;
+}
+
+.doctorPortal .publicServices>*:nth-child(2n-1) {
+    background-color: #1caa8e;
+}
+
+.doctorPortal .publicServices>* .icon {
+    font-size: 100px;
+    margin-right: 30px;
+}
+
+.doctorPortal .publicServices>* p {
+    font-weight: 700;
+}
+
+.doctorPortal .ourServices {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 60px;
+    width: 100%;
+}
+
+.doctorPortal .ourServices>div>p {
+    font-size: 20px;
+    font-weight: 900;
+    background: linear-gradient(#19D3AE, #0FCFEC);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.doctorPortal .ourServices>div>h2 {
+    font-weight: 700;
+}
+
+.doctorPortal .servicesDetails {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.doctorPortal .servicesDetails>* {
+    width: 400px;
+    padding: 0px 20px;
+    padding-top: 100px;
+}
+
+.doctorPortal .servicesDetails>*>p:nth-child(2) {
+    padding: 20px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.doctorPortal .servicesDetails>*>p:nth-child(3) {
+    color: gray;
+}
+
+.doctorPortal .dentalCare>div {
+    display: flex;
+    justify-content: center;
+    padding-right: 40px;
+}
+
+.doctorPortal .dentalCare img {
+
+    height: 47rem;
+    width: 23rem;
+    margin-left: 100px;
+    margin-top: 60px;
+    margin-right: 40px;
+}
+
+.doctorPortal .dentalCare h1 {
+    margin-top: 50px;
+}
+
+.doctorPortal .dentalCare p {
+    font-size: 20px;
+    margin-top: 20px;
+    color: gray;
+}
+
+.doctorPortal .makeAppointment {
+    display: flex;
+    background-image: url(../../images/Mask\ Group\ 4.jpg);
+    background-size: 100% 75%, cover;
+    height: 600px;
+    color: white;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    justify-content: center;
+    padding-right: 10%;
+}
+
+.doctorPortal .makeAppointment>div {
+    width: 100%;
+}
+
+.doctorPortal .makeAppointment img {
+    height: 600px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.doctorPortal .makeAppointment h4 {
+    margin-top: 220px;
+    margin-bottom: 30px;
+    background: linear-gradient(#19D3AE, #0FCFEC);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.doctorPortal .makeAppointment h1 {
+    margin-bottom: 30px;
+}
+
+.doctorPortal .makeAppointment p {
+    margin-bottom: 30px;
+}
+
+.testimonial {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.testimonial .testimonialDetails {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.testimonial .testimonialDetails>* {
+    margin: 30px;
+}
+
+.testimonial h4,
+.ourBlog h4,
+.ourDoctors h4,
+.contactUs h4 {
+    margin-bottom: 30px;
+    background: linear-gradient(#19D3AE, #0FCFEC);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
+
+.testimonial .testimonialDetails img,
+.ourBlog .ourBlogDetails img {
+    height: 50px;
+    margin-right: 20px;
+    margin-left: 10px;
+}
+
+.testimonial .patientinfo>p:first-child,
+.ourBlog .doctorinfo>p:first-child,
+.ourDoctors .doctorsInfo>p:first-child {
+    background: linear-gradient(#19D3AE, #0FCFEC);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+    margin-bottom: -5px;
+}
+
+.ourBlog,
+.ourDoctors {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.ourBlog .ourBlogDetails,
+.ourDoctors .ourDoctorsDetails {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.ourBlog .ourBlogDetails>*,
+.ourDoctors .ourDoctorsDetails>* {
+    margin: 30px;
+}
+
+.ourBlog h4,
+.ourBlog h1,
+.ourDoctors h4,
+.contactUs h1,
+.contactUs h4 {
+    text-align: center;
+}
+
+.ourBlog .ourBlogDetails>*:first-child {
+    background: linear-gradient(to right, #19D3AE, #0FCFEC);
+    color: white;
+}
+
+.ourDoctors .doctorsInfo {
+    text-align: center;
+    margin-top: 5px;
+}
+
+.contactUs {
+    background-image: url(../../images/Mask\ Group\ 4.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    color: white;
+    padding: 60px 0;
+    background-size: 100% 100%;
+}
+
+.contactUs .contactUsDetails {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.contactUs .contactUsDetails input {
+    width: 31.25rem;
+}
+
+.contactUs .contactUsDetails input:first-child,
+.contactUs .contactUsDetails input:nth-child(3) {
+    padding: 20px;
+    border-radius: 4px;
+    outline: none;
+    border: none;
+    margin-top: 10px;
+}
+
+.contactUs .contactUsDetails input:nth-child(5) {
+    padding: 20px;
+    /* padding-bottom: 150px; */
+    border-radius: 4px;
+    outline: none;
+    border: none;
+    margin-top: 10px;
+}
+
+.contactUs .contactUsDetails .submitBtn {
+    background: linear-gradient(to right, #19D3AE, #0FCFEC);
+    margin-top: 10px;
+    font-weight: 700;
+    color: white;
+    padding: 10px 50px;
+    border-radius: 4px;
+    outline: none;
+}
+
+@media only screen and (max-width: 1200px) {
+    .doctorPortal .ourServices>div {
+        width: 100%;
+    }
+
+    .doctorImg img {
+        width: 90%;
+        height: 80%;
+    }
+
+    .doctorPortal .dentalCare h1 {
+        font-size: 30px;
+        font-weight: 700;
+    }
+
+    .doctorPortal .dentalCare p {
+        font-size: 16px;
+    }
+
+    .doctorPortal .makeAppointment h1 {
+        font-size: 30px;
+        font-weight: 700;
+        line-height: 1;
+    }
+
+    .doctorPortal .testimonial h4,
+    .doctorPortal .testimonial h1 {
+        text-align: center;
+    }
+
+    .contactUs .contactUsDetails input {
+        width: 20rem;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .navLink {
+        padding: 0 15px;
+    }
+
+    .doctorText h1 {
+        font-size: 30px;
+        font-weight: 700;
+    }
+
+    .doctorText p {
+        font-size: 14px;
+    }
+
+    .doctorText .button,
+    .doctorPortal .dentalCare .button,
+    .doctorPortal .makeAppointment .button {
+        padding: 10px;
+        font-size: 12px;
+        font-weight: 800;
+    }
+
+    .doctorImg img {
+        width: 90%;
+        height: 80%;
+    }
+
+    .doctorPortal .makeAppointment img {
+        margin-left: -80px;
+    }
+
+    .doctorPortal .makeAppointment h1 {
+        margin-bottom: 10px;
+    }
+
+    .doctorPortal .makeAppointment h4 {
+        margin-top: 160px;
+        margin-bottom: 10px;
+    }
+
+    .doctorPortal .publicServices>* {
+        margin-top: 20px;
+        width: 250px;
+        height: 120px;
+        line-height: .8;
+    }
+
+    .doctorPortal .publicServices>* .icon {
+        font-size: 60px;
+        margin-right: 10px;
+    }
+
+    .doctorPortal .dentalCare img {
+        height: 400px;
+    }
+
+    .doctorPortal .dentalCare p {
+        font-size: 14px;
+    }
+
+    .contactUs .contactUsDetails input {
+        width: 18rem;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    .doctorText h1 {
+        font-size: 25px;
+    }
+
+    .doctorText p {
+        font-size: 14px;
+    }
+
+    .doctorImg img {
+        height: 310px;
+    }
+
+    .doctorPortal .dentalCare>div {
+        flex-wrap: wrap-reverse;
+        padding: 0 40px;
+    }
+
+    .doctorPortal .dentalCare img {
+        margin-left: 0;
+    }
+}
+
+@media only screen and (max-width: 771px) {
+    .doctorNav {
+        margin-right: 1rem;
+        padding-top: 40px;
+    }
+
+    .navbarIcon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 1.5rem 0rem 0rem 1rem;
+    }
+
+    .SunriseIcon {
+        width: 7rem;
+        height: 5rem;
+    }
+
+    .navLink {
+        padding: 0 5px;
+        font-size: 12px;
+    }
+
+    .doctorText {
+        margin: 0 20px;
+    }
+
+    .doctorImg img {
+        padding-top: 10px;
+        padding-left: 40px;
+        height: 250px;
+        width: 400px;
+    }
+
+    .doctorPortal .publicServices>* {
+        margin-top: 50px;
+        width: 150px;
+        height: 50px;
+        line-height: .6;
+    }
+
+    .doctorPortal .publicServices>* .icon {
+        font-size: 20px;
+        margin-right: 5px;
+    }
+
+    .doctorPortal .publicServices>* p {
+        margin-bottom: 0px;
+        font-size: 10px;
+    }
+
+    .doctorPortal .publicServices>* small {
+        font-size: 8px;
+    }
+
+    .doctorPortal .dentalCare img {
+        height: 300px;
+    }
+
+    .doctorPortal .makeAppointment {
+        height: 350px;
+    }
+
+    .doctorPortal .makeAppointment img {
+        height: 350px;
+    }
+
+    .doctorPortal .makeAppointment h1 {
+        margin-bottom: 0;
+    }
+
+    .doctorPortal .makeAppointment h4 {
+        margin-top: 140px;
+        margin-bottom: 0;
+    }
+
+    .doctorPortal .makeAppointment p {
+        line-height: .8;
+        margin-bottom: 0;
+    }
+
+    .doctorPortal .makeAppointment>div:first-child {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        margin-left: 10px;
+    }
+
+    .doctorPortal .makeAppointment>div:last-child {
+        margin-top: -45px;
+        margin-left: -60px;
+    }
+
+    .contactUs h1 {
+        font-size: 30px;
+    }
+
+    .contactUs .contactUsDetails input {
+        width: 300px;
+    }
+
+    .contactUs .contactUsDetails input:first-child,
+    .contactUs .contactUsDetails input:nth-child(3) {
+        padding: 10px;
+    }
+
+    .contactUs .contactUsDetails input:nth-child(5) {
+        padding: 10px;
+        padding-bottom: 150px;
+    }
+
+    .doctorPortal .makeAppointment .button {
+        padding: 5px 10px;
+        margin-top: 4px;
+        font-size: 10px;
+    }
+}
+
+@media only screen and (max-width: 411px) {
+    .navLink {
+        padding: 0 5px;
+        font-size: 10px;
+    }
+
+    .SunriseIcon {
+        width: 5rem;
+        height: 4rem;
+    }
+
+    .doctorImg img {
+        padding-left: 20px;
+        height: 150px;
+        width: 250px;
+        margin-top: 40px;
+    }
+}
+
+.testimonial-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .centered-content {
+        justify-content: center;
+        display: grid;
+    }
+
+    /* Define the styles for the custom button */
+    .custom-button {
+        background: linear-gradient(#19D3AE, #0FCFEC);
+        /* Change to your desired button color */
+        color: #fff;
+        /* Text color */
+        border: none;
+        padding: 10px 20px;
+        /* Adjust padding as needed */
+        font-size: 16px;
+        /* Adjust font size as needed */
+        cursor: pointer;
+        border-radius: 5px;
+        /* Rounded corners */
+        transition: background-color 0.3s ease-in-out;
+        /* Smooth hover effect */
+    }
+
+    /* Add a hover effect to the button */
+    .custom-button:hover {
+        background-color: #0056b3;
+        /* Change to a slightly different shade on hover */
+    }
+
+    .feedbackBtn {
+        display: flex;
+        justify-content: center;
+    }
+
+}
+
+/* Feedback Modal */
+/* Define styles for the custom modal */
+
+
+/* Style the modal header */
+.custom-modal .modal-header {
+    background-image: linear-gradient(to right, #19D3AE, #0FCFEC);
+    color: #fff;
+    /* Header text color */
+    border-bottom: none;
+    /* Remove border */
+}
+
+/* Style the modal title */
+.custom-modal .modal-title {
+    font-size: 24px;
+    /* Title font size */
+}
+
+/* Style the modal body */
+.custom-modal .modal-body {
+    padding: 20px;
+    /* Add padding to the body */
+}
+
+/* Style the form inputs */
+.custom-modal input[type="text"] {
+    border: 1px solid #ced4da;
+    /* Input border */
+    border-radius: 5px;
+    /* Rounded corners */
+    padding: 10px;
+    /* Input padding */
+}
+
+/* Style the modal footer */
+.custom-modal .modal-footer {
+    background-image: linear-gradient(to right, #19D3AE, #0FCFEC);
+    padding: 0.3rem !important;
+
+    /* Remove border */
+}
+
+/* Style the submit button */
+.custom-modal .modal-footer .btn-primary {
+    background-color: #007bff;
+    /* Button background color */
+    color: #fff;
+    /* Button text color */
+    border: none;
+    /* Remove button border */
+    border-radius: 5px;
+    /* Rounded corners */
+    padding: 10px 20px;
+    /* Button padding */
+    transition: background-color 0.3s ease-in-out;
+    /* Smooth hover effect */
+}
+
+/* Add a hover effect to the submit button */
+.custom-modal .modal-footer .btn-primary:hover {
+    background-image: linear-gradient(to right, #19D3AE, #0FCFEC);
+}
+
+/* Style the "Close" button */
+.custom-modal .modal-footer .custom-button-close {
+    background-color: #e74c3c;
+    /* Red background color */
+    color: #fff;
+    /* Text color */
+    margin-right: 1rem;
+}
+
+/* Add a hover effect to the "Close" button */
+.custom-modal .modal-footer .custom-button-close:hover {
+    background-color: #c0392b;
+    /* Slightly different shade of red on hover */
+}
+
+/* Style the "Submit" button */
+.custom-modal .modal-footer .custom-button-submit {
+    background-color: #2ecc71;
+    /* Green background color */
+    color: #fff;
+    /* Text color */
+}
+
+/* Add a hover effect to the "Submit" button */
+.custom-modal .modal-footer .custom-button-submit:hover {
+    background-color: #27ae60;
+    /* Slightly different shade of green on hover */
+}
+
+/* Style for input fields */
+input[type="email"],
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Style for the submit button */
+.submitBtn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submitBtn:hover {
+    background-color: #0056b3;
+}
+
+.contactUs-text {
+    text-align: center;
+    /* Center-align text horizontally */
+    padding: 20px;
+    /* Add some padding for better readability */
+    font-size: 18px;
+    /* Adjust the font size as needed */
+    line-height: 1.5;
+    /* Adjust line-height for better spacing */
+    color: #fffdfd;
+    /* Adjust text color as needed */
+    text-align: center;
+}
