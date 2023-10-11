@@ -69,7 +69,7 @@ const MainPage = () => {
                 <Header />
 
                 <Services profileInformation={profileInformation} />
-                <div className="appoinmentContent container-fluid">
+                <div className="appoinmentContent container-fluid" id='getAppointment'>
                   
                     <h2 className='appoinmentHeading'>Services We Provide</h2>
 
@@ -140,7 +140,7 @@ const MainPage = () => {
 
                 <ContactUs setLoader={setLoader} />
 
-                <Footer></Footer>
+                <Footer profileInformation={profileInformation}></Footer>
 
                 <ToastContainer />
 

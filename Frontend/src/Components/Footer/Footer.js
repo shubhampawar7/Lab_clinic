@@ -5,93 +5,53 @@ import { faTwitter, faFacebookF, faGooglePlusG } from '@fortawesome/free-brands-
 import { Nav } from 'react-bootstrap';
 
 
-const Footer = () => {
+const Footer = ({ profileInformation }) => {
+    const matches = profileInformation[0]?.address.match(/(Branch \d+:[^]+?)(?=Branch \d+:|$)/g);
+    const Address = [matches];
+    console.log(profileInformation[0]?.shopTiming, "pooo");
     return (
         <div className="footer">
-            <div>
-                <div>
-                    <div>
+            <div className='mainFooter'>
+                {/* officeTimings Start */}
+                <div className='officeTimings mainSection'>
+                    <div className='footerHeading'>
                         <p>Office Timings</p>
                     </div>
-                    <div>
-                        {/* <small>Emergency Dental Care</small>
-                        <br />
-                        <small>Check Up</small>
-                        <br />
-                        <small>Treatment of Personal Diseases</small>
-                        <br />
-                        <small>Tooth Extraction</small>
-                        <br />
-                        <small>Check Up</small> */}
-                        <div>
-                            {/* <h6>Office Timings :</h6> */}
-                            <ul>
-
-                                <li>
-                                    Monday	-  [ 08:00 Am –  09:30 Pm ]
-                                </li>
-
-                                <li>
-                                    Tuesday	- [ 08:00 Am –  09:30 Pm ]
-
-                                </li>
-
-                                <li>
-                                    Wednesday	- [ 08:00 Am –  09:30 Pm ]
-
-                                </li>
-                                <li>
-                                    Thursday	- [ 08:00 Am –  09:30 Pm ]
-
-                                </li>
-                                <li>
-                                    Friday		- [ 08:00 Am –  09:30 Pm ]
-
-                                </li>
-                                <li>
-                                    Saturday	- [ 08:00 Am –  09:30 Pm ]
-
-                                </li>
-
-                                <li>
-                                    Sunday	- [ 08:00 Am –  02:00 Pm ]
-
-                                </li>
-                            </ul>
-
-                        </div>
-
+                    <div >
+                        <ul>
+                            {
+                                profileInformation[0]?.shopTiming.map((timing) => (
+                                    <li>
+                                        {timing.day}	-  [ {timing.openingTime} Am –  {timing.closingTime} Pm ]
+                                    </li>
+                                ))
+                            }
+                        </ul>
                     </div>
                 </div>
-                <div>
-                    <div>
+                {/* officeTimings End */}
+
+                {/* Address Start */}
+                <div className='mainSection'>
+                    <div className='footerHeading'>
                         <p>Our Address</p>
                     </div>
                     <div>
-                        {/* <small>Emergency Dental Care</small>
-                        <br />
-                        <small>Check Up</small>
-                        <br />
-                        <small>Treatment of Personal Diseases</small>
-                        <br />
-                        <small>Tooth Extraction</small>
-                        <br />
-                        <small>Check Up</small> */}
-                        <div>
-                            {/* <h6>Address:</h6> */}
-                            <ul>
-                                <li>Branch 1 : <br/>Akash Heritage Shop No. 2 Near old Dhaneswar School Ground, Lane No. 15, Gokul Nagar, Dhanori, Pune, Maharashtra 411015.</li>
-                                <li>Branch 2 : <br/> Pawan corner Building, Opp. Narayanrao Genba Moze School. Munjaba wasti Tingre Nagar, Road, Dhanori, Pune, Maharashtra 411015.</li>
-
-                            </ul>
-                        </div>
-
-
+                        {
+                            Address[0]?.map((address) => (
+                                <ul>
+                                    <li>{address}</li>
+                                </ul>
+                            ))
+                        }
                     </div>
                 </div>
-                <div>
-                    <div>
-                        {/* <p>Our Address</p> */}
+                {/* Address End */}
+
+                {/* Social Media and Contact Start */}
+                <div className='mainSection'>
+                    <div className='footerHeading'>
+                        <p>Social Media</p>
                     </div>
                     <div>
                         {/* <small>Bsrisal, Bangladesh</small> */}
@@ -101,12 +61,14 @@ const Footer = () => {
                             <FontAwesomeIcon icon={faTwitter} />
                         </div>
                         <small>Call Now</small>
-                        <p className="callNow">+91 95524 47349</p>
+                        <p className="callNow">{profileInformation[0]?.phone}</p>
                         <Nav.Item>
                             <Nav.Link className="navLink" href="/admin"><h5>Admin</h5></Nav.Link>
                         </Nav.Item>
                     </div>
                 </div>
+                {/* Social Media and Contact End */}
+
             </div>
             <div style={{ textAlign: "center", marginTop: "30px" }}>
                 <small>Copyright 2023 All Right Reserved</small>

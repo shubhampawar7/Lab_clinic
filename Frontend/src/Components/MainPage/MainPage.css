@@ -761,7 +761,7 @@ input[type="text"] {
 
 /* Style for the submit button */
 .submitBtn {
-    background-color: #007bff;
+    /* background-color: #007bff; */
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -771,7 +771,11 @@ input[type="text"] {
 }
 
 .submitBtn:hover {
-    background-color: #0056b3;
+    /* background-color: #0056b3; */
+}
+.contactContent{
+    display: flex;
+    justify-content: center;
 }
 
 .contactUs-text {
@@ -786,4 +790,5 @@ input[type="text"] {
     color: #fffdfd;
     /* Adjust text color as needed */
     text-align: center;
+    width: 50%;
 }

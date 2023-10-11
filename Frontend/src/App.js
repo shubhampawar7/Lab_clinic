@@ -25,9 +25,9 @@ function App() {
           <Route exact path="/">
             <MainPage></MainPage>
           </Route>
-          <Route exact path="/appointment">
+          {/* <Route exact path="/">
             <Appointment></Appointment>
-          </Route>
+          </Route> */}
           <Route exact path="/admin/doctorsZone">
             <DoctorsZone></DoctorsZone>
           </Route>

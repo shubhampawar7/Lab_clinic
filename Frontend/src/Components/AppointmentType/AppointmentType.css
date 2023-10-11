@@ -73,7 +73,7 @@
 
 .popupDetails .submitBtn {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     margin-right: 55px;
 }
 
