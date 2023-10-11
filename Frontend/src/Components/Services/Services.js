@@ -20,11 +20,9 @@ const Services = ({ profileInformation }) => {
                     <div>
                         <p>Opening Hours</p>
                         <small>
-                            MON - SAT [ 08:00 Am –  09:30 Pm ]
+                            MON - SAT [ {profileInformation[0]?.shopTiming[0]?.openingTime} Am –  {profileInformation[0]?.shopTiming[0]?.closingTime} Pm ]
                             <br />
-                            SUN [ 08:00 Am –  02:00 Pm ]
-
-
+                            SUN [ Closed ]
                         </small>
                     </div>
                 </div>

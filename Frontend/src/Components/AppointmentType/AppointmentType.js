@@ -4,11 +4,15 @@ import { Card } from 'react-bootstrap';
 import Popup from "reactjs-popup";
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import LabTestingData from "./AppointmentType.json";
 
 const AppointmentType = (props) => {
     const [returnedData, setReturnedData] = useState(null)
     const { title, time, shortDetails } = props.appointmentData;
     const { register, handleSubmit, errors, reset } = useForm();
+    const [selectedCategory, setSelectedCategory] = useState('');
+    const [selectedSubcategory, setSelectedSubcategory] = useState('');
+
 
     const onSubmit = (data) => {
         const key = (length = 6) => Math.random().toString(20).substr(2, length);
@@ -28,54 +32,7 @@ const AppointmentType = (props) => {
             })
     };
 
-    const bloodCategories = [
-        {
-            label: 'Iron Studies (Iron, TIBC, Transferrin saturation)',
-            subcategories: ['Iron', 'TIBC', 'Transferrin saturation'],
-        },
-        {
-            label: 'CBC-Complete Hemogram Test(28)',
-            subcategories: [
-                'Basophils Percentage',
-                'Basophils-Absolute Count',
-                'Eosinophils Percentage',
-                // Add all CBC-Complete Hemogram Test subcategories here...
-            ],
-        },
-        {
-            label: 'Heart',
-            subcategories: [
-                'Lipid Profile',
-                'Cholesterol/HDL ratio',
-                'HDL-Cholesterol',
-                'LDL /HDL ratio',
-                'LDL- Cholesterol',
-                'Non HDL Cholesterol',
-                'Total Cholesterol',
-                'Triglycerides',
-                'VLDL Cholesterol',
-                // Add all Heart subcategories here...
-            ],
-        },
-        {
-            label: 'Kidney',
-            subcategories: [
-                'Kidney Profile',
-                'BUN (Blood Urea Nitrogen)',
-                'BUN/Creatinine ratio',
-                'Calcium',
-                'Creatinine',
-                'eGFR (estimated Glomerular Filtration Rate)',
-                'Urea',
-                'Uric Acid',
-                // Add all Kidney subcategories here...
-            ],
-        },
-        // Add more categories as needed...
-    ];
 
-    const [selectedCategory, setSelectedCategory] = useState('');
-    const [selectedSubcategory, setSelectedSubcategory] = useState('');
 
 
     return (
@@ -89,47 +46,53 @@ const AppointmentType = (props) => {
                         <div className="popupDetails">
                             <h5>{title}</h5>
                             <form onSubmit={handleSubmit(onSubmit)}>
-                                <input name="time" className="takeInput" placeholder="Time" defaultValue={time} ref={register} />
+                                <input name="time" className="takeInput" placeholder="Time *" defaultValue={time} ref={register} />
                                 <br />
                                 <br />
-                                <input name="name" className="takeInput" placeholder="Your Name" ref={register({ required: true })} />
+                                <input name="name" className="takeInput" placeholder="Your Name *" ref={register({ required: true })} />
                                 <br />
                                 {errors.name && "Name is required"}
                                 <br />
-                                <input name="phoneNumber" className="takeInput" placeholder="Phone Number" ref={register({ pattern: /^\(?([0-9]{3})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/, required: true })} />
+                                <input name="phoneNumber" className="takeInput" placeholder="Phone Number *" ref={register({ pattern: /^\d{10}$/, required: true })} />
                                 <br />
                                 {errors.phoneNumber && "Please enter a valid number"}
                                 <br />
-                                <input name="email" className="takeInput" placeholder="Email" ref={register({ pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, required: true })} />
+                                <input name="email" className="takeInput" placeholder="Email *" ref={register({ pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, required: true })} />
                                 <br />
                                 {errors.email && "Please enter a valid email"}
                                 <br />
                                 <div>
                                     {/* <label className='categoryLable'>Blood Category:</label> */}
                                     <select
+                                        name='category'
                                         value={selectedCategory}
                                         onChange={(e) => setSelectedCategory(e.target.value)}
                                         className='categoryDropdown'
+                                        ref={register({ required: true })}
                                     >
                                         <option value="">Select Category</option>
-                                        {bloodCategories.map((category, index) => (
+                                        {LabTestingData.map((category, index) => (
                                             <option key={index} value={category.label}>
                                                 {category.label}
                                             </option>
                                         ))}
                                     </select>
+                                    <br></br>
+                                    {errors.category && "Please enter a category"}
+
 
                                     {selectedCategory && (
                                         <div style={{ marginTop: "1rem" }}>
                                             {/* <label className='categoryLable'>Subcategory:</label> */}
                                             <select
+                                                name='subcategory'
                                                 value={selectedSubcategory}
                                                 onChange={(e) => setSelectedSubcategory(e.target.value)}
                                                 className='categoryDropdown'
-
+                                                ref={register({ required: true })}
                                             >
                                                 <option value="">Select Subcategory</option>
-                                                {bloodCategories
+                                                {LabTestingData
                                                     .find((category) => category.label === selectedCategory)
                                                     ?.subcategories.map((subcategory, index) => (
                                                         <option key={index} value={subcategory}>
@@ -137,6 +100,10 @@ const AppointmentType = (props) => {
                                                         </option>
                                                     ))}
                                             </select>
+
+                                            <br></br>
+                                            {errors.subcategory && "Please enter a subcategory "}
+
                                         </div>
                                     )}
                                 </div>
