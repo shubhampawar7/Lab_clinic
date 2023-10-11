@@ -1,0 +1,45 @@
+[
+    {
+        "label": "Iron Studies (Iron, TIBC, Transferrin saturation)",
+        "subcategories": [
+            "Iron",
+            "TIBC",
+            "Transferrin saturation"
+        ]
+    },
+    {
+        "label": "CBC-Complete Hemogram Test(28)",
+        "subcategories": [
+            "Basophils Percentage",
+            "Basophils-Absolute Count",
+            "Eosinophils Percentage"
+        ]
+    },
+    {
+        "label": "Heart",
+        "subcategories": [
+            "Lipid Profile",
+            "Cholesterol/HDL ratio",
+            "HDL-Cholesterol",
+            "LDL /HDL ratio",
+            "LDL- Cholesterol",
+            "Non HDL Cholesterol",
+            "Total Cholesterol",
+            "Triglycerides",
+            "VLDL Cholesterol"
+        ]
+    },
+    {
+        "label": "Kidney",
+        "subcategories": [
+            "Kidney Profile",
+            "BUN (Blood Urea Nitrogen)",
+            "BUN/Creatinine ratio",
+            "Calcium",
+            "Creatinine",
+            "eGFR (estimated Glomerular Filtration Rate)",
+            "Urea",
+            "Uric Acid"
+        ]
+    }
+]

@@ -63,6 +63,33 @@
     margin-bottom: 30px;
 }
 
+/* .dateTimeField div {
+    display: flex;
+    width: 500px;
+    justify-content: center;
+} */
+.dateTimeField {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+
+}
+
+.dateTimeFieldInner {
+    display: flex;
+    justify-content: center;
+    width: 500px;
+}
+
+.timeInput {
+    padding: 10px;
+    width: 500px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    outline: none;
+    margin-left: 20px;
+}
+
 .popupDetails .takeInput {
     padding: 10px;
     width: 500px;
@@ -109,6 +136,17 @@
     .popupDetails .takeInput {
         width: 300px;
     }
+
+    .categoryDropdown {
+        width: 300px;
+
+    }
+
+    .dateTimeFieldInner {
+        width: 300px;
+    }
+
+
 }
 
 @media only screen and (max-width: 441px) {
@@ -120,4 +158,23 @@
     .popupDetails .takeInput {
         width: 200px;
     }
+
+    .categoryDropdown {
+        width: 200px;
+
+    }
+
+
+    .dateTimeFieldInner {
+        width: 200px;
+        flex-wrap: wrap;
+    }
+
+    .dateTimeFieldInner .takeInput {
+        margin-bottom: 1rem;
+    }
+    .timeInput{
+        margin: 0;
+    }
+
 }

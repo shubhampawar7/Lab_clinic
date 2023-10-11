@@ -6,6 +6,7 @@ const jwt =require("jsonwebtoken")
 const Information = require("../models/Information")
 const Feedback = require('../models/Feedback')
 require('dotenv').config();
+const Appointment =require("../models/Appointment")
 
 const path = require('path');
 const download = require('download');
@@ -632,11 +633,81 @@ const addEditInformation= async (req, res) => {
 // }
 
 
+// Appointment Start
+const getAppointment=async(req,res)=>{
+    try {
+        const appointment = await Appointment.find();
+        res.json(appointment);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
+
+}
+
+const postAppointment=async(req,res)=>{
+    try {
+        const { date,time,name,phone ,email,category,subcategory} = req.body;
+        const newAppointment = new Appointment({date,time,name,phone,email,category,subcategory});
+        await newAppointment.save();
+        res.json(newAppointment);
+        
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+
+    }
+}
+
+const deleteAppointment = async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      const deletedAppointment = await Appointment.findByIdAndRemove(id);
+      console.log(deletedAppointment,"deleid");
+
+      if (!deletedAppointment) {
+        return res.status(404).json({ message: 'deletedAppointment not found' });
+      }
+      else{
+        res.json({ message: 'deletedAppointment deleted', deletedInfo });
+
+      }
+  
+    } catch (error) {
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  };
+// Appointment End
 
 
 
 
-module.exports={Getdata,Adduser,FindUser,UpdateUser,verifyMail,verifyLogin,userlogout,DeleteUser,forgotpass,forgotpasswordLoad,resetpass,Upload,FilesAllData,FileSingleData,DownloadFile,DeleteFile,getFeedback,addFeedback ,deleteFeedback,getInformation,addEditInformation,deleteInformation,editInformation}
+module.exports={Getdata,
+    Adduser,
+    FindUser,
+    UpdateUser,
+    verifyMail,
+    verifyLogin,
+    userlogout,
+    DeleteUser,
+    forgotpass,
+    forgotpasswordLoad,
+    resetpass,
+    Upload,
+    FilesAllData,
+    FileSingleData,
+    DownloadFile,
+    DeleteFile,
+    getFeedback,
+    addFeedback ,
+    deleteFeedback,
+    getInformation,
+    addEditInformation,
+    deleteInformation,
+    editInformation,
+    getAppointment,
+    postAppointment,
+    deleteAppointment
+}
 
 
 
