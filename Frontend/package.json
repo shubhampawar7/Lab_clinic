@@ -18,6 +18,7 @@
     "react-bootstrap": "^1.0.1",
     "react-calendar": "^3.0.1",
     "react-datepicker": "^2.14.1",
+    "react-datetime": "^3.2.0",
     "react-datetime-picker": "^5.5.2",
     "react-dom": "^16.13.1",
     "react-full-height": "^1.2.1",

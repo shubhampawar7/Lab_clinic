@@ -6,6 +6,8 @@ import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import LabTestingData from "./AppointmentType.json";
 
+
+
 const AppointmentType = (props) => {
     const [returnedData, setReturnedData] = useState(null)
     const { title, time, shortDetails } = props.appointmentData;
@@ -46,9 +48,14 @@ const AppointmentType = (props) => {
                         <div className="popupDetails">
                             <h5>{title}</h5>
                             <form onSubmit={handleSubmit(onSubmit)}>
-                                <input name="time" className="takeInput" placeholder="Time *" defaultValue={time} ref={register} />
-                                <br />
-                                <br />
+                                <div className='dateTimeField'>
+                                    <div className='dateTimeFieldInner'>
+                                        <input type='date' name="date"  className="takeInput " placeholder="Date *" defaultValue={time} ref={register} />
+                                        <br />
+                                        <br />
+                                        <input type='time' name="time" className="timeInput" placeholder="Time *" defaultValue={time} ref={register} />
+                                    </div>
+                                </div>
                                 <input name="name" className="takeInput" placeholder="Your Name *" ref={register({ required: true })} />
                                 <br />
                                 {errors.name && "Name is required"}
@@ -70,7 +77,7 @@ const AppointmentType = (props) => {
                                         className='categoryDropdown'
                                         ref={register({ required: true })}
                                     >
-                                        <option value="">Select Category</option>
+                                        <option value="">Select Category *</option>
                                         {LabTestingData.map((category, index) => (
                                             <option key={index} value={category.label}>
                                                 {category.label}
@@ -91,7 +98,7 @@ const AppointmentType = (props) => {
                                                 className='categoryDropdown'
                                                 ref={register({ required: true })}
                                             >
-                                                <option value="">Select Subcategory</option>
+                                                <option value="">Select Subcategory *</option>
                                                 {LabTestingData
                                                     .find((category) => category.label === selectedCategory)
                                                     ?.subcategories.map((subcategory, index) => (

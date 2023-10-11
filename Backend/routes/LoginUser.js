@@ -104,10 +104,23 @@ router.get("/download/:filename", (req, res) => {
 router.delete("/delete/:filename", UserController.DeleteFile)
 
 
-//feedback routes booking 
+//feedback routes feedback 
 router.get('/feedback',UserController.getFeedback);
 router.post('/feedback',UserController.addFeedback);
 router.delete('/feedback/:id',UserController.deleteFeedback);
+
+
+//Appointment Start 
+router.get('/appointment',UserController.getAppointment);
+router.post('/appointment',UserController.postAppointment);
+router.delete('/appointment/:id',UserController.deleteAppointment);
+
+
+
+
+//Appointment End 
+
+
 
 
 // router.get('/feedback', async (req, res) => {
