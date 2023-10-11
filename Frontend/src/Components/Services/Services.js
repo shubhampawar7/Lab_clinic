@@ -10,15 +10,8 @@ import "./Services.css"
 
 
 
- const Services = ({profileInformation}) => {
-    const handleLocationClick = () => {
-        // Create a URL with the location query parameter
-        const locationQuery = encodeURIComponent('Kharadi, Pune'); // Replace with the desired location
-        const mapUrl = `https://www.google.com/maps/search/?q=${locationQuery}`;
+const Services = ({ profileInformation }) => {
 
-        // Redirect to the map URL
-        window.location.href = mapUrl;
-    };
     return (
         <>
             <div className="publicServices">
@@ -35,11 +28,13 @@ import "./Services.css"
                         </small>
                     </div>
                 </div>
-                <div style={{ cursor: "pointer" }} onClick={handleLocationClick}>
+                <div style={{ cursor: "pointer" }} >
                     <FontAwesomeIcon className="icon" icon={faMapMarkerAlt} />
                     <div>
-                        <p>Visit our location</p>
-                        <small>pune</small>
+                        <a href="https://maps.app.goo.gl/c4sL2xau9PYCUzd67" className='locationLink' target="_blank" rel="noopener noreferrer">
+                            <p>Visit our location</p>
+                            <small>pune</small>
+                        </a>
                     </div>
                 </div>
                 <div>

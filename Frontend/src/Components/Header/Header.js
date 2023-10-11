@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import SunriseIcon from '../../images/SunriseIcon.png';
 
 
- const Header = () => {
+const Header = () => {
     return (
         <>
             <div className="doctorHeading">
@@ -41,9 +41,11 @@ import SunriseIcon from '../../images/SunriseIcon.png';
                                 <br />
                                 Our Priority</h1>
                             <p>The pathologist is that physician or clinical scientist who specializes in the art and science of medical risk estimation and disease diagnosis, using observations at the clinical, gross, body fluid, light microscopic, immunophenotypic, ultrastructural, cytogenetic, and molecular levels.</p>
-                            <Link style={{ textDecoration: "none" }} to="/appointment">
+                            {/* <Link style={{ textDecoration: "none" }} to="/appointment"> */}
+                            <a href='/#getAppointment'>
                                 <Button className="button">GET APPOINTMENT</Button>
-                            </Link>
+                            </a>
+                            {/* </Link> */}
                         </div>
                     </div>
                     <div className="col-md-7">

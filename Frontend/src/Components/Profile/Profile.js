@@ -132,7 +132,7 @@ const Profile = () => {
             <Form key={index} onSubmit={(e) => editInformation(profile._id,e)}>
               <Row>
                 <Col md={12} className='profileForm'>
-                  <Form.Group controlId="phone">
+                  <Form.Group className='profileInputForm' controlId="phone">
                     <Form.Label>Phone Number</Form.Label>
                     <Form.Control
                       type="text"
@@ -143,7 +143,7 @@ const Profile = () => {
                     />
                   </Form.Group>
 
-                  <Form.Group controlId="address">
+                  <Form.Group className='profileInputForm' controlId="address">
                     <Form.Label>Address</Form.Label>
                     <textarea
                       type="text"
@@ -155,7 +155,7 @@ const Profile = () => {
                     />
                     <p>Note : Write address Branch 1:(address) in this format</p>
                   </Form.Group>
-                  <Form.Group controlId="email">
+                  <Form.Group className='profileInputForm' controlId="email">
                     <Form.Label>Email</Form.Label>
                     <Form.Control
                       type="email"
@@ -168,7 +168,7 @@ const Profile = () => {
 
                   {/* Shop timing dropdown start */}
 
-                  <Form.Group controlId="shopTimings">
+                  <Form.Group className='profileInputForm' controlId="shopTimings">
                     <Form.Label>Select Day:</Form.Label>
                     <div className='shopTimingsMain'>
                       <select value={selectedDay} onChange={handleChangeDay}>

@@ -62,11 +62,14 @@ const ContactUs = ({ setLoader }) => {
                             <div>
                                 <h4>Contact Us</h4>
                                 <h1>Always contact with us</h1>
-                                <p className='contactUs-text'>
-                                    Our dedicated customer support team is available during office hours to address your inquiries,
-                                    provide information about our services, assist with report inquiries, and guide you through the testing process.
-                                    We are committed to ensuring a seamless and satisfactory experience for every patient.
-                                </p>
+                                <div className='contactContent'>
+                                    <p className='contactUs-text'>
+                                        Our dedicated customer support team is available during office hours to address your inquiries,
+                                        provide information about our services, assist with report inquiries, and guide you through the testing process.
+                                        We are committed to ensuring a seamless and satisfactory experience for every patient.
+                                    </p>
+                                </div>
+
 
                                 <div className="contactUsDetails">
                                     <form onSubmit={handleContact}>
