@@ -17,42 +17,42 @@ require('dotenv').config();
 
 //contact us 
 // POST route to send email
-router.post('/send-email', (req, res) => {
-    const { email, subject, message } = req.body;
-    console.log(email, "email");
+// router.post('/send-email', (req, res) => {
+//     const { email, subject, message } = req.body;
+//     console.log(email, "email");
 
 
-    // Create a Nodemailer transporter
-    const transporter = nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 587,
-        secure: false,
-        auth: {
-            user: process.env.EMAIL,
-            pass: process.env.PASSWORD
-        },
-    });
-    const mailOptions = {
-        from: process.env.EMAIL,
-        to: email,
-        subject: subject,
-        html: message +"Thank you for considering Sunrise Diagnostics & Speciality Lab for your diagnostic needs. We value your interest and are here to assist you in any way we can. If you have any questions, require assistance, or would like to book an appointment, please don't hesitate to get in touch with us.Contact Information: Phone: +91 95524 47349  Email:sunrised2017@gmail.com",
-        // html: `<h1>Hi ,` + message + `</h1><p>please click here to verify <a href="http://127.0.0.1:7000/verify?id=``" >your mail</a></p>`
+//     // Create a Nodemailer transporter
+//     const transporter = nodemailer.createTransport({
+//         host: "smtp.gmail.com",
+//         port: 587,
+//         secure: false,
+//         auth: {
+//             user: process.env.EMAIL,
+//             pass: process.env.PASSWORD
+//         },
+//     });
+//     const mailOptions = {
+//         from: process.env.EMAIL,
+//         to: email,
+//         subject: subject,
+//         html: message +"Thank you for considering Sunrise Diagnostics & Speciality Lab for your diagnostic needs. We value your interest and are here to assist you in any way we can. If you have any questions, require assistance, or would like to book an appointment, please don't hesitate to get in touch with us.Contact Information: Phone: +91 95524 47349  Email:sunrised2017@gmail.com",
+//         // html: `<h1>Hi ,` + message + `</h1><p>please click here to verify <a href="http://127.0.0.1:7000/verify?id=``" >your mail</a></p>`
 
-    };
-    console.log(mailOptions.html)
+//     };
+//     console.log(mailOptions.html)
 
 
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.error('Error sending email', error);
-            res.status(500).send('Error sending email');
-        } else {
-            console.log('Email sent: ' + info.response);
-            res.sendStatus(200); // Email sent successfully
-        }
-    });
-});
+//     transporter.sendMail(mailOptions, (error, info) => {
+//         if (error) {
+//             console.error('Error sending email', error);
+//             res.status(500).send('Error sending email');
+//         } else {
+//             console.log('Email sent: ' + info.response);
+//             res.sendStatus(200); // Email sent successfully
+//         }
+//     });
+// });
 
 
 
@@ -119,6 +119,13 @@ router.delete('/appointment/:id',UserController.deleteAppointment);
 
 
 //Appointment End 
+
+
+//Mail routes
+router.post('/send-email',UserController.sendContactEmail);
+router.post('/mailappointment',UserController.sendMailForAppointment);
+
+
 
 
 

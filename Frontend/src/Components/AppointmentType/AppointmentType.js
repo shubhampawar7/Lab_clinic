@@ -1,142 +1,283 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './AppointmentType.css'
 import { Card } from 'react-bootstrap';
 import Popup from "reactjs-popup";
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import LabTestingData from "./AppointmentType.json";
+import ApiService from '../../middleware/ApiService';
+import Loader from '../Global/Loader/Loader';
+import { toast } from 'react-toastify';
+import { Button } from '@material-ui/core';
+import bgRemoveDoctor from '../../images/5790-removebg.png';
+
 
 
 
 const AppointmentType = (props) => {
     const [returnedData, setReturnedData] = useState(null)
-    const { title, time, shortDetails } = props.appointmentData;
+    // const { title, time, shortDetails } = props.appointmentData;
     const { register, handleSubmit, errors, reset } = useForm();
     const [selectedCategory, setSelectedCategory] = useState('');
     const [selectedSubcategory, setSelectedSubcategory] = useState('');
+    const [loader, setLoader] = useState(false);
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
 
+    const [formData, setformData] = useState({
+        date: '',
+        time: '',
+        name: '',
+        phone: '',
+        email: '',
+        category: '',
+        subcategory: ''
+    })
 
-    const onSubmit = (data) => {
-        const key = (length = 6) => Math.random().toString(20).substr(2, length);
-        const appointmentInfo = { title, key: key(), details: data, action: "notVisited", action1: "pending" }
-        console.log(appointmentInfo);
-        fetch("https://guarded-anchorage-08361.herokuapp.com/addAppointment", {
-            method: "post",
-            headers: {
-                "Content-type": "application/json"
-            },
-            body: JSON.stringify(appointmentInfo)
+    const handlePopupClose = () => {
+        setformData({
+            date: '',
+            time: '',
+            name: '',
+            phone: '',
+            email: '',
+            category: '',
+            subcategory: '',
+        });
+    };
+
+    const handleFormChange = (e) => {
+        e.preventDefault();
+        const { name, value } = e.target;
+        setformData({
+            ...formData,
+            [name]: value
         })
-            .then(res => res.json())
-            .then(data => {
-                setReturnedData(data)
-                reset()
-            })
+
+    }
+
+
+    // const postAppointment = async (e) => {
+    //     e.preventDefault();
+
+    //     setLoader(true);
+    //     const payload = formData;
+    //     try {
+    //         await ApiService.post("/appointment", payload, null, (res, err) => {
+
+    //             if (res !== null) {
+
+
+    //                 console.log(res, "app res");
+    //                 setLoader(false);
+    //                 setIsPopupOpen(false);
+    //                 setformData({
+    //                     date: '',
+    //                     time: '',
+    //                     name: '',
+    //                     phone: '',
+    //                     email: '',
+    //                     category: '',
+    //                     subcategory: ''
+    //                 });
+    //                 toast.success("Feedback added successfully");
+
+
+    //             }
+    //             else {
+    //                 console.log(err.message, "error post res");
+    //             }
+    //         })
+    //     } catch (error) {
+    //         console.log(error.message, "error postAppointment() while calling");
+    //     }
+
+    // }
+
+
+
+    const onSubmit = async () => {
+        setLoader(true);
+        const payload = formData;     
+
+        try {
+            // First, make the appointment booking API call
+            await ApiService.post('/appointment', payload, null, async (res, err) => {
+                if (res !== null) {
+                    console.log(res, 'app res');
+                    try {
+                        await ApiService.post('/mailappointment', payload, null, (emailRes, emailErr) => {
+                            if (emailRes !== null) {
+                                console.log(emailRes, 'app res');
+                                setLoader(false);
+                                setIsPopupOpen(false);
+                                setformData({
+                                    date: '',
+                                    time: '',
+                                    name: '',
+                                    phone: '',
+                                    email: '',
+                                    category: '',
+                                    subcategory: '',
+                                });
+                                toast.success('Appointment booked successfully');
+
+                            } else {
+                                console.log(emailErr.message, 'error sending email');
+                            }
+                        });
+                    } catch (emailError) {
+                        console.log(emailError.message, 'error sending email');
+                    }
+                } else {
+                    console.log(err.message, 'error post res');
+                }
+            });
+        } catch (error) {
+            console.log(error.message, 'error postAppointment() while calling');
+        }
     };
 
 
 
 
+
     return (
-        <div className="col-md-4 appointmentType">
-            <Card className='appoinementCard' >
-                <Card.Body>
-                    <h5>{title}</h5>
-                    <p className="mb-2 text-muted">{time}</p>
-                    <p><small>{shortDetails}</small></p>
-                    <Popup trigger={<button>BOOK APPOINTMENT</button>} contentStyle={{ width: "600px", border: "none", background: "transparent" }} modal closeOnDocumentClick>
-                        <div className="popupDetails">
-                            <h5>{title}</h5>
-                            <form onSubmit={handleSubmit(onSubmit)}>
-                                <div className='dateTimeField'>
-                                    <div className='dateTimeFieldInner'>
-                                        <input type='date' name="date"  className="takeInput " placeholder="Date *" defaultValue={time} ref={register} />
-                                        <br />
-                                        <br />
-                                        <input type='time' name="time" className="timeInput" placeholder="Time *" defaultValue={time} ref={register} />
-                                    </div>
-                                </div>
-                                <input name="name" className="takeInput" placeholder="Your Name *" ref={register({ required: true })} />
-                                <br />
-                                {errors.name && "Name is required"}
-                                <br />
-                                <input name="phoneNumber" className="takeInput" placeholder="Phone Number *" ref={register({ pattern: /^\d{10}$/, required: true })} />
-                                <br />
-                                {errors.phoneNumber && "Please enter a valid number"}
-                                <br />
-                                <input name="email" className="takeInput" placeholder="Email *" ref={register({ pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, required: true })} />
-                                <br />
-                                {errors.email && "Please enter a valid email"}
-                                <br />
-                                <div>
-                                    {/* <label className='categoryLable'>Blood Category:</label> */}
-                                    <select
-                                        name='category'
-                                        value={selectedCategory}
-                                        onChange={(e) => setSelectedCategory(e.target.value)}
-                                        className='categoryDropdown'
-                                        ref={register({ required: true })}
-                                    >
-                                        <option value="">Select Category *</option>
-                                        {LabTestingData.map((category, index) => (
-                                            <option key={index} value={category.label}>
-                                                {category.label}
-                                            </option>
-                                        ))}
-                                    </select>
-                                    <br></br>
-                                    {errors.category && "Please enter a category"}
+        <>
+            <div className="makeAppointment" id='getAppointment'>
+                {loader === true && <Loader className="loader-container" visible={loader} />}
+
+                <div>
+                    <img src={bgRemoveDoctor} alt="" />
+                </div>
+                <div>
+                    <h4>APPOINTMENT</h4>
+                    <h1>Make an Appointment <br />Today</h1>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui doloremque dolore ipsa dolorem exercitationem culpa in inventore asperiores nostrum tenetur.</p>
+                    <div className="appoinmentContent container-fluid" >
 
 
-                                    {selectedCategory && (
-                                        <div style={{ marginTop: "1rem" }}>
-                                            {/* <label className='categoryLable'>Subcategory:</label> */}
-                                            <select
-                                                name='subcategory'
-                                                value={selectedSubcategory}
-                                                onChange={(e) => setSelectedSubcategory(e.target.value)}
-                                                className='categoryDropdown'
-                                                ref={register({ required: true })}
-                                            >
-                                                <option value="">Select Subcategory *</option>
-                                                {LabTestingData
-                                                    .find((category) => category.label === selectedCategory)
-                                                    ?.subcategories.map((subcategory, index) => (
-                                                        <option key={index} value={subcategory}>
-                                                            {subcategory}
-                                                        </option>
-                                                    ))}
-                                            </select>
+                        <div className="col-md-12 appointmentType" >
 
-                                            <br></br>
-                                            {errors.subcategory && "Please enter a subcategory "}
+
+                            <Popup trigger={<button>BOOK APPOINTMENT</button>} contentStyle={{ width: "600px", border: "none", background: "transparent" }} modal closeOnDocumentClick
+                                open={isPopupOpen}
+                                onClose={handlePopupClose}
+                            >
+                                <div className="popupDetails">
+                                    {/* <h5>{title}</h5> */}
+                                    {/* <form onSubmit={(e) => postAppointment(e)}> */}
+                                    <form onSubmit={handleSubmit(onSubmit)}>
+                                        <div className='dateTimeField'>
+                                            <div className='dateTimeFieldInner'>
+                                                <input value={formData.date} type='date' name="date" className="takeInput " placeholder="Date *" min={new Date().toISOString().split('T')[0]} ref={register} onChange={(e) => handleFormChange(e)} />
+                                                <br />
+                                                <br />
+                                                <input value={formData.time} type='time' name="time" className="timeInput" placeholder="Time *" ref={register} onChange={(e) => handleFormChange(e)} />
+                                            </div>
 
                                         </div>
-                                    )}
+                                        <div style={{ marginBottom: "1.5rem" }}>
+                                            <i style={{ color: "black" }}>
+                                                Lab Timing : MON - SAT [ {props.profileInformation[0]?.shopTiming[0]?.openingTime} Am –  {props.profileInformation[0]?.shopTiming[0]?.closingTime} Pm ] --
+                                                SUN [ Closed ]
+                                            </i>
+                                            -
+                                            <i></i>
+                                        </div>
+
+                                        <input value={formData.name} name="name" className="takeInput" placeholder="Your Name *" ref={register({ required: true })} onChange={(e) => handleFormChange(e)} />
+                                        <br />
+                                        {errors.name && <span className='validationError'>Name is required *</span>}
+                                        <br />
+                                        <input value={formData.phone} name="phone" className="takeInput" placeholder="Phone Number *" ref={register({ pattern: /^\d{10}$/, required: true })} onChange={(e) => handleFormChange(e)} />
+                                        <br />
+                                        {errors.phone && <span className='validationError'>Please enter a valid number *</span>}
+                                        <br />
+                                        <input value={formData.email} name="email" className="takeInput" placeholder="Email *" ref={register({ pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, required: true })} onChange={(e) => handleFormChange(e)} />
+                                        <br />
+                                        {errors.email && <span className='validationError'>Please enter a valid email *</span>}
+                                        <br />
+                                        <div>
+                                            {/* <label className='categoryLable'>Blood Category:</label> */}
+                                            <select
+                                                name='category'
+                                                value={formData.category}
+                                                onChange={(e) => {
+                                                    setSelectedCategory(e.target.value);
+                                                    handleFormChange(e);
+                                                }}
+                                                className='categoryDropdown'
+                                                ref={register({ required: true })}
+
+                                            >
+                                                <option value="">Select Category *</option>
+                                                {LabTestingData.map((category, index) => (
+                                                    <option key={index} value={category.label}>
+                                                        {category.label}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                            <br></br>
+                                            {errors.category && <span className='validationError'>Please enter a category *</span>}
+
+
+                                            {selectedCategory && (
+                                                <div style={{ marginTop: "1rem" }}>
+                                                    {/* <label className='categoryLable'>Subcategory:</label> */}
+                                                    <select
+                                                        name='subcategory'
+                                                        value={formData.subcategory}
+                                                        onChange={(e) => {
+                                                            setSelectedSubcategory(e.target.value);
+                                                            handleFormChange(e);
+                                                        }}
+                                                        className='categoryDropdown'
+                                                        ref={register({ required: true })}
+
+                                                    >
+                                                        <option value="">Select Subcategory *</option>
+                                                        {LabTestingData
+                                                            .find((category) => category.label === selectedCategory)
+                                                            ?.subcategories.map((subcategory, index) => (
+                                                                <option key={index} value={subcategory}>
+                                                                    {subcategory}
+                                                                </option>
+                                                            ))}
+                                                    </select>
+
+                                                    <br></br>
+                                                    {errors.subcategory && <span className='validationError'>Please enter a subcategory *</span>}
+
+                                                </div>
+                                            )}
+                                        </div>
+                                        <p style={{ marginTop: "1rem" }}>If any test is not Available
+                                            <br></br>
+                                            Contact : {props.profileInformation[0]?.phone}
+                                        </p>
+
+                                        <div className="submitBtn">
+                                            <input type="submit" value="Send" />
+                                        </div>
+                                        {
+                                            returnedData &&
+                                            <div>
+                                                <p>Your Appointment Id: {returnedData._id}</p>
+                                                <a href="/">Go to Home Page</a>
+                                            </div>
+                                        }
+
+
+                                    </form>
                                 </div>
-                                {/* <input name="date" className="takeInput" placeholder="mm/dd/yyyy" defaultValue={props.fullDate1} ref={register({ pattern: /^(0?[1-9]|1[012])[/-](0?[1-9]|[12][0-9]|3[01])[/-]\d{4}$/, required: true })} /> */}
-                                <br />
-                                {errors.date && "Please enter a valid date"}
-                                <br />
-                                <div className="submitBtn">
-                                    <input type="submit" value="Send" />
-                                </div>
-                                {
-                                    returnedData &&
-                                    <div>
-                                        <p>Your Appointment Id: {returnedData._id}</p>
-                                        <a href="/">Go to Home Page</a>
-                                    </div>
-                                }
+                            </Popup>
 
 
-                            </form>
-                        </div>
-                    </Popup>
-
-                </Card.Body>
-            </Card>
-        </div >
+                        </div >
+                    </div>
+                </div>
+            </div>
+        </>
     );
 };
 

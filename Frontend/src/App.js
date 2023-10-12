@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import Appointment from './Components/Appointment/Appointment';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import DoctorsZone from './Components/DoctorsZone/DoctorsZone';
+import LabAppointment from './Components/LabAppointment/LabAppointment';
 import Dashboard from './Components/Dashboard/Dashboard';
 import Profile from './Components/Profile/Profile';
 import Settings from './Components/Settings/Settings';
@@ -28,8 +28,8 @@ function App() {
           {/* <Route exact path="/">
             <Appointment></Appointment>
           </Route> */}
-          <Route exact path="/admin/doctorsZone">
-            <DoctorsZone></DoctorsZone>
+          <Route exact path="/admin/appointment">
+            <LabAppointment></LabAppointment>
           </Route>
           <Route  path="/dashboard">
             <Dashboard></Dashboard>
