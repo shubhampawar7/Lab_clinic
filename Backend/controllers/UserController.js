@@ -7,7 +7,7 @@ const Information = require("../models/Information")
 const Feedback = require('../models/Feedback')
 require('dotenv').config();
 const Appointment =require("../models/Appointment")
-
+const config=require( "../config/config");
 const path = require('path');
 const download = require('download');
 const { fileURLToPath } = require("url");
@@ -668,7 +668,7 @@ const deleteAppointment = async (req, res) => {
         return res.status(404).json({ message: 'deletedAppointment not found' });
       }
       else{
-        res.json({ message: 'deletedAppointment deleted', deletedInfo });
+        res.json({ message: 'deletedAppointment deleted', deletedAppointment });
 
       }
   
@@ -677,6 +677,113 @@ const deleteAppointment = async (req, res) => {
     }
   };
 // Appointment End
+
+const sendContactEmail=async(req, res) => {
+    const { email, subject, message } = req.body;
+
+
+    // Create a Nodemailer transporter
+    const transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: false,
+        auth: {
+            user: config.EMAIL,
+            pass: config.PASSWORD
+        },
+    });
+    const mailOptions = {
+        from: email, 
+        to: config.EMAIL,  
+        subject: subject,
+    
+        // HTML content of the email
+        html: `
+            <p>You have received a message from a visitor through the contact form on your website.</p>
+            <p>Contact Information:</p>
+            <ul>
+                <li><strong>Email:</strong> ${email}</li>
+            </ul>
+            
+            <p>Message:</p>
+            <p>${message}</p>
+            
+            <p>Please respond to this message promptly to assist the visitor with their inquiry.</p>
+            
+            <p>Best regards,<br>Your Website Contact Form</p>
+        `,
+    };
+    
+    console.log(mailOptions.html)
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.error('Error sending email', error);
+            res.status(500).send('Error sending email');
+        } else {
+            console.log('Email sent: ' + info.response);
+            res.sendStatus(200); // Email sent successfully
+        }
+    });
+}
+
+
+//Mail for appointment
+const sendMailForAppointment = async (req, res) => {
+    const {date,time,name, email,category,subcategory } = req.body;
+
+    // Create a Nodemailer transporter
+    const transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: false,
+        auth: {
+            user: config.EMAIL,
+            pass: config.PASSWORD,
+        },
+    });
+
+    const mailOptions = {
+        from: config.EMAIL, // Sender's email address
+        to: email, // Recipient's email address
+        subject: `Lab Testing Appointment `, // Email subject
+    
+        // HTML content of the email
+        html: `
+            <p>Dear ${name},</p>
+            <p>Thank you for booking an appointment with Sunrise Diagnostics & Speciality Lab.</p>
+            
+            <p>Your appointment details:</p>
+            <ul>
+                <li><strong>Date:</strong> ${date}</li>
+                <li><strong>Time:</strong> ${time}</li>
+                <li><strong>Category:</strong> ${category}</li>
+                <li><strong>Subcategory:</strong> ${subcategory}</li>
+            </ul>
+            
+            <p>Should you have any questions or need further assistance, please do not hesitate to contact us. Our contact information is provided below:</p>
+            
+            <p><strong>Phone:</strong> +91 95524 47349</p>
+            <p><strong>Email:</strong> sunrised2017@gmail.com</p>
+            
+            <p>We look forward to seeing you on ${date} at ${time} for your appointment. Thank you for choosing Sunrise Diagnostics & Speciality Lab for your diagnostic needs.</p>
+            
+            <p>Best regards,<br>Sunrise Diagnostics & Speciality Lab Team</p>
+        `,
+    };
+    
+    // Send the email
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.error('Error sending email', error);
+            res.status(500).send('Error sending email');
+        } else {
+            console.log('Email sent: ' + info.response);
+            res.sendStatus(200); // Email sent successfully
+        }
+    });
+    
+};
 
 
 
@@ -706,7 +813,9 @@ module.exports={Getdata,
     editInformation,
     getAppointment,
     postAppointment,
-    deleteAppointment
+    deleteAppointment,
+    sendContactEmail,
+    sendMailForAppointment
 }
 
 

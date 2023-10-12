@@ -14,7 +14,6 @@ import Loader from '../Global/Loader/Loader';
 
 // ** Images Start **
 import drImage from '../../images/dr-image.png';
-import bgRemoveDoctor from '../../images/5790-removebg.png';
 //** Images End **
 
 // ** Components Start **
@@ -69,27 +68,12 @@ const MainPage = () => {
                 <Header />
 
                 <Services profileInformation={profileInformation} />
-                <div className="appoinmentContent container-fluid" id='getAppointment'>
-                  
-                    <h2 className='appoinmentHeading'>Services We Provide</h2>
 
-                    <div className="row">
-
-                        {
-                            appointmentData.map(app =>
-                                <AppointmentType
-                                    key={app.key}
-                                    appointmentData={app}
-
-                                ></AppointmentType>)
-                        }
-                    </div>
-                </div>
 
                 <AboutUs />
 
                 {/* Appointment Section Start */}
-                <div className="makeAppointment">
+                {/* <div className="makeAppointment" id='getAppointment'>
                     <div>
                         <img src={bgRemoveDoctor} alt="" />
                     </div>
@@ -98,8 +82,22 @@ const MainPage = () => {
                         <h1>Make an Appointment <br />Today</h1>
                         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui doloremque dolore ipsa dolorem exercitationem culpa in inventore asperiores nostrum tenetur.</p>
                         <Button className="button">LEARN MORE</Button>
+                        <div className="appoinmentContent container-fluid" >
+
+
+                            <div className="row"> */}
+
+
+                                <AppointmentType
+
+                                    profileInformation={profileInformation}
+
+                                ></AppointmentType>
+
+                            {/* </div>
+                        </div>
                     </div>
-                </div>
+                </div> */}
                 {/* Appointment Section End */}
 
 

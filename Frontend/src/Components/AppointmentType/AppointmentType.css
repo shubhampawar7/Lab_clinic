@@ -5,6 +5,20 @@
     margin-top: 40px;
 }
 
+.loader-container {
+    justify-content: center !important;
+    display: flex !important;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+    padding: 20px;
+    width: 10% !important;
+}
+
 .appoinementCard {
     width: 18rem;
     border-radius: 1rem;
@@ -22,6 +36,11 @@
     width: 500px;
     border-radius: 10px;
     border: 1px solid gray;
+}
+
+.validationError {
+    color: red;
+
 }
 
 .appointmentType h5 {
@@ -124,6 +143,16 @@
         font-size: 14px;
         padding: 8px 10px;
     }
+
+    .appointmentType {
+        margin: 1rem;
+    }
+
+    .appointmentType button {
+        font-size: 11px;
+        padding: 8px 10px;
+        margin: 0.2rem;
+    }
 }
 
 @media only screen and (max-width: 771px) {
@@ -144,6 +173,16 @@
 
     .dateTimeFieldInner {
         width: 300px;
+    }
+
+    .appointmentType {
+        margin: 0;
+    }
+
+    .appointmentType button {
+        font-size: 11px;
+        padding: 8px 10px;
+        margin: 0.2rem;
     }
 
 
@@ -173,8 +212,19 @@
     .dateTimeFieldInner .takeInput {
         margin-bottom: 1rem;
     }
-    .timeInput{
+
+    .timeInput {
         margin: 0;
+    }
+
+    .appointmentType {
+        margin: 0;
+    }
+
+    .appointmentType button {
+        font-size: 11px;
+        padding: 8px 10px;
+        margin: 0.2rem;
     }
 
 }

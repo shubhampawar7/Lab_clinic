@@ -22,6 +22,19 @@
     box-shadow: 0 3px 24px rgba(0, 0, 0, 0.1);
     border-radius: 3rem;
     width: 100%;
+    margin-bottom: 1rem;
+  }
+  .searchBar{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .searchBar input{
+    width: 85%;
+    border: none;
+    border-radius:2rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
   }
   
   .dashboard-header h1 {
@@ -38,6 +51,7 @@
   height: auto;
   display: flex;
   align-items: flex-start;
+  justify-content: center;
   height: auto;
   margin-bottom: 30px;
   margin: 0px 7px 30px 7px !important;

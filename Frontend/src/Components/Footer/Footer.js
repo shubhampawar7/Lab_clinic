@@ -20,8 +20,8 @@ const Footer = ({ profileInformation }) => {
                     <div >
                         <ul>
                             {
-                                profileInformation[0]?.shopTiming.map((timing) => (
-                                    <li>
+                                profileInformation[0]?.shopTiming.map((timing,index) => (
+                                    <li key={index}>
                                         {timing.day}	-  [ {timing.openingTime} Am –  {timing.closingTime} Pm ]
                                     </li>
                                 ))
@@ -38,8 +38,8 @@ const Footer = ({ profileInformation }) => {
                     </div>
                     <div>
                         {
-                            Address[0]?.map((address) => (
-                                <ul>
+                            Address[0]?.map((address,index) => (
+                                <ul key={index}>
                                     <li>{address}</li>
                                 </ul>
                             ))
