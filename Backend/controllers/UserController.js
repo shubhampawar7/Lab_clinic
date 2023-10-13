@@ -785,6 +785,64 @@ const sendMailForAppointment = async (req, res) => {
     
 };
 
+const deletMailAppointment=async (req, res) => {
+    const {date,time,name, email,category,subcategory } = req.body;
+
+    // Create a Nodemailer transporter
+    const transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: false,
+        auth: {
+            user: config.EMAIL,
+            pass: config.PASSWORD,
+        },
+    });
+
+    const mailOptions = {
+        from: config.EMAIL, // Sender's email address
+        to: email, // Recipient's email address
+        subject: `Lab Testing Appointment Request Cancelled`, // Email subject
+    
+        // HTML content of the email
+        html: `
+            <p>Dear ${name},</p>
+            <p>We regret to inform you that your appointment request with Sunrise Diagnostics & Speciality Lab has not been approved or is not possible at this time.</p>
+
+            <p> appointment details:</p>
+            <ul>
+                <li><strong>Date:</strong> ${date}</li>
+                <li><strong>Time:</strong> ${time}</li>
+                <li><strong>Category:</strong> ${category}</li>
+                <li><strong>Subcategory:</strong> ${subcategory}</li>
+            </ul>
+            
+            
+            <p>If you have any questions or need further assistance, please do not hesitate to contact us. Our contact information is provided below:</p>
+            
+            <p><strong>Phone:</strong> +91 95524 47349</p>
+            <p><strong>Email:</strong> sunrised2017@gmail.com</p>
+            
+            <p>We apologize for any inconvenience this may cause and appreciate your understanding.</p>
+            
+            <p>Best regards,<br>Sunrise Diagnostics & Speciality Lab Team</p>
+        `,
+    };
+    
+    
+    // Send the email
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.error('Error sending email', error);
+            res.status(500).send('Error sending email');
+        } else {
+            console.log('Email sent: ' + info.response);
+            res.sendStatus(200); // Email sent successfully
+        }
+    });
+    
+};
+
 
 
 
@@ -815,7 +873,8 @@ module.exports={Getdata,
     postAppointment,
     deleteAppointment,
     sendContactEmail,
-    sendMailForAppointment
+    sendMailForAppointment,
+    deletMailAppointment
 }
 
 

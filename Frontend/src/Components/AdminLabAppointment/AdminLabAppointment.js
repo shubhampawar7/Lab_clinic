@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import './AdminLabAppointment.css';
 import Sidebar from '../Sidebar/Sidebar';
-import AdminEditAppointment from "../AdminLabAppointment/AdminEditAppointment";
 import ApiService from '../../middleware/ApiService';
-import { Link } from "react-router-dom";
-// import EditIcon from "../../images/EditIcon.png";
 import DeleteIcon from "../../images/DeleteIcon.png";
 import swal from 'sweetalert';
 import { toast } from 'react-toastify';
-
+import SortIcon from "../../images/SortIcon.png";
+import AscIcon from "../../images/AscIcon.png";
+import DesIcon from "../../images/DesIcon.png";
 
 
 const AdminLabAppointment = () => {
     const [AppointmentData, setAppointmentData] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
+    const [sortField, setSortField] = useState('date'); // Default sorting field
+    const [sortOrder, setSortOrder] = useState('asc'); // Default sorting order
 
     const filteredAppointments = AppointmentData.filter((appointment) => {
         const query = searchQuery.toLowerCase();
@@ -26,6 +27,27 @@ const AdminLabAppointment = () => {
             appointment.category.toLowerCase().includes(query) ||
             appointment.subcategory.toLowerCase().includes(query)
         );
+    });
+
+    const handleSort = (field) => {
+        if (sortField === field) {
+            // Toggle sorting order if the same field is clicked
+            setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+        } else {
+            // Default to ascending order when changing the sorting field
+            setSortField(field);
+            setSortOrder('asc');
+        }
+    };
+
+    const sortedAppointments = [...filteredAppointments].sort((a, b) => {
+        const aValue = a[sortField];
+        const bValue = b[sortField];
+        if (sortOrder === 'asc') {
+            return aValue.localeCompare(bValue);
+        } else {
+            return bValue.localeCompare(aValue);
+        }
     });
 
     const getAppointment = async () => {
@@ -42,9 +64,8 @@ const AdminLabAppointment = () => {
         }
     };
 
-
-    const handleDeleteAppointment = async (id) => {
-
+    const handleDeleteAppointment = async (data) => {
+        console.log(data,"ddddddddddddsssssssss");
         try {
             swal({
                 title: 'Are you sure?',
@@ -54,13 +75,19 @@ const AdminLabAppointment = () => {
                 dangerMode: true,
             }).then((willDelete) => {
                 if (willDelete) {
-                    ApiService.delete(`/appointment/${id}`, null, null, (res, err) => {
-                        if (res !== null) {
-                            toast.error('Appointment deleted successfully');
-                            getAppointment();
-                        } else {
-                            console.log('handleDeleteAppointment', err.message, 'error while deleting Appointment');
-                        }
+                    ApiService.delete(`/appointment/${data._id}`, null, null, async (res, err) => {
+                        await ApiService.post('/deletemailappointment', data, null, (DelemailRes, DelemailErr) => {
+
+                            if (res !== null) {
+                                console.log(DelemailRes,"DelemailRes");
+                                toast.error('Appointment deleted successfully');
+                                getAppointment();
+                            } else {
+                                console.log('handleDeleteAppointment', DelemailErr.message, 'error while deleting Appointment');
+                            }
+
+                        })
+                      
                     });
                 } else {
                     console.log('Appointment canceled');
@@ -69,11 +96,18 @@ const AdminLabAppointment = () => {
         } catch (error) {
             console.log(error.message, 'handleDeleteAppointment() while deleting');
         }
-    }
+    };
 
     useEffect(() => {
         getAppointment();
     }, []);
+
+    const getSortIcon = (field) => {
+        if (field === sortField) {
+            return sortOrder === 'asc' ? <img style={{ width: "2rem", height: "2rem" }} src={AscIcon}></img> : <img style={{ width: "2rem", height: "2rem" }} src={DesIcon}></img>;
+        }
+        return '';
+    };
 
     return (
         <div className="mainAppointment">
@@ -95,50 +129,65 @@ const AdminLabAppointment = () => {
                     </div>
                     <div className='appointmentContent'>
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover">
+                            <table class="table table-striped ">
                                 <thead class="table-dark">
-                                    <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Appointment Date</th>
-                                        <th scope="col">Time</th>
-                                        <th scope="col">Phone</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Home Test</th>
-                                        <th scope="col">Address</th>
-                                        <th scope="col">Category</th>
-                                        <th scope="col">SubCategory</th>
+                                    <tr style={{ cursor: "pointer" }}>
+                                        <th scope="col" onClick={() => handleSort('_id')}>
+                                            No {getSortIcon('_id')}
+                                        </th>
+                                        <th scope="col" onClick={() => handleSort('date')}>
+                                            Appointment Date {getSortIcon('date')}
+                                        </th>
+                                        <th scope="col" onClick={() => handleSort('time')}>
+                                            Time {getSortIcon('time')}
+                                        </th>
+                                        <th scope="col" onClick={() => handleSort('name')}>
+                                            Name {getSortIcon('name')}
+                                        </th>
+                                        <th scope="col" onClick={() => handleSort('phone')}>
+                                            Phone {getSortIcon('phone')}
+                                        </th>
+                                        <th scope="col" onClick={() => handleSort('email')}>
+                                            Email {getSortIcon('email')}
+                                        </th>
+                                        <th scope="col" onClick={() => handleSort('active')}>
+                                            Home Test {getSortIcon('active')}
+                                        </th>
+                                        <th scope="col" onClick={() => handleSort('address')}>
+                                            Address {getSortIcon('address')}
+                                        </th>
+                                        <th scope="col" onClick={() => handleSort('category')}>
+                                            Category {getSortIcon('category')}
+                                        </th>
+                                        <th scope="col" onClick={() => handleSort('subcategory')}>
+                                            SubCategory {getSortIcon('subcategory')}
+                                        </th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {filteredAppointments.map((appointment, index) => (
+                                    {sortedAppointments.map((appointment, index) => (
                                         <tr key={index}>
-                                            <th scope="row">{index + 1}</th>
-                                            <td>{appointment.name}</td>
+                                            <td>{index + 1}</td>
                                             <td>{appointment.date.split('T')[0]}</td>
                                             <td>{appointment.time}</td>
+                                            <td>{appointment.name}</td>
                                             <td>{appointment.phone}</td>
                                             <td>{appointment.email}</td>
                                             <td>{appointment.active}</td>
                                             <td>{appointment.address}</td>
                                             <td>{appointment.category}</td>
                                             <td>{appointment.subcategory}</td>
-                                            <td style={{cursor:"pointer"}}>
-                                                <div >
-                                                    {/* <img className='EditDeleteIcon' src={EditIcon}></img> */}
-                                                    <img className='EditDeleteIcon' src={DeleteIcon} onClick={() => handleDeleteAppointment(appointment._id)}></img>
-                                                </div>
+                                            <td style={{ cursor: "pointer" }}>
+                                                <img className='EditDeleteIcon' src={DeleteIcon} onClick={() => handleDeleteAppointment(appointment)}></img>
                                             </td>
                                         </tr>
                                     ))}
                                 </tbody>
                             </table>
-                            {
-                                filteredAppointments.length === 0 &&
-                            <h3 className='text-center'>Data Not Found !</h3>
+                            {filteredAppointments.length === 0 &&
+                                <h3 className='text-center'>Data Not Found !</h3>
                             }
-
                         </div>
                     </div>
                 </div>

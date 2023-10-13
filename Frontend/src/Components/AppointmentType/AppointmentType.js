@@ -14,6 +14,7 @@ import bgRemoveDoctor from '../../images/5790-removebg.png';
 
 
 
+
 const AppointmentType = (props) => {
     const [returnedData, setReturnedData] = useState(null)
     // const { title, time, shortDetails } = props.appointmentData;
@@ -112,6 +113,7 @@ const AppointmentType = (props) => {
             await ApiService.post('/appointment', payload, null, async (res, err) => {
                 if (res !== null) {
                     console.log(res, 'app res');
+                    setLoader(false)
                     try {
                         return
                         await ApiService.post('/mailappointment', payload, null, (emailRes, emailErr) => {
