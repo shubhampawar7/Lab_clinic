@@ -118,12 +118,15 @@ router.delete('/appointment/:id',UserController.deleteAppointment);
 
 
 
+
 //Appointment End 
 
 
 //Mail routes
 router.post('/send-email',UserController.sendContactEmail);
 router.post('/mailappointment',UserController.sendMailForAppointment);
+router.post('/deletemailappointment',UserController.deletMailAppointment);
+
 
 
 

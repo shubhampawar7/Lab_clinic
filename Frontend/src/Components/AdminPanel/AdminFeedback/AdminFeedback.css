@@ -47,7 +47,7 @@
   }
   
   .feedback-card {
-    width: 95%;
+    width: calc(100% - 40px);
     margin: 20px;
     padding: 20px;
     /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
@@ -55,7 +55,8 @@
    }
   
   .feedback-table {
-    width: 95%;
+    width: calc(100% - 40px);
+    overflow: auto;
     margin: 20px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
