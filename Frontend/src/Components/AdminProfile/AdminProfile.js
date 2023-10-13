@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Profile.css';
+import './AdminProfile.css';
 import Sidebar from '../Sidebar/Sidebar';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import ApiService from '../../middleware/ApiService';
@@ -7,7 +7,7 @@ import Loader from '../Global/Loader/Loader';
 import swal from 'sweetalert';
 
 
-const Profile = () => {
+const AdminProfile = () => {
 
   const [loader, setLoader] = useState(false);
   const [profileInformation, setProfileInformation] = useState([]);
@@ -207,4 +207,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default AdminProfile;

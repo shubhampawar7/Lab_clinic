@@ -9,9 +9,9 @@ import {
 } from "react-router-dom";
 import Appointment from './Components/Appointment/Appointment';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import LabAppointment from './Components/LabAppointment/LabAppointment';
+import AdminLabAppointment from './Components/AdminLabAppointment/AdminLabAppointment';
 import Dashboard from './Components/Dashboard/Dashboard';
-import Profile from './Components/Profile/Profile';
+import AdminProfile from './Components/AdminProfile/AdminProfile';
 import Settings from './Components/Settings/Settings';
 import NotFound from './Components/NotFound/NotFound';
 import Login from './Components/AdminPanel/Login';
@@ -29,7 +29,7 @@ function App() {
             <Appointment></Appointment>
           </Route> */}
           <Route exact path="/admin/appointment">
-            <LabAppointment></LabAppointment>
+            <AdminLabAppointment></AdminLabAppointment>
           </Route>
           <Route  path="/dashboard">
             <Dashboard></Dashboard>
@@ -38,7 +38,7 @@ function App() {
             <AdminFeedback></AdminFeedback>
           </Route>
           <Route exact path="/admin/profile">
-            <Profile></Profile>
+            <AdminProfile></AdminProfile>
           </Route>
           <Route exact path="/admin/settings">
             <Settings></Settings>
