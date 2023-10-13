@@ -1,0 +1,224 @@
+.mainAppointment {
+    width: 100%;
+    max-width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    display: flex;
+    background-color: #e1f1f3;
+}
+
+.table-responsive {
+
+    height: calc(100vh - 15rem);
+}
+/* .appointment-card {
+    width: 95%;
+    margin: 20px;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px ;
+   } */
+
+
+   
+.EditDeleteIcon{
+    width: 2rem;
+    height: 2rem;
+    margin-right: 1rem;
+}
+
+.appointmentSection {
+    width: calc(100% - 250px);
+    max-width: 100%;
+    padding: 2rem 3rem;
+    background-color: #f5f7fa;
+}
+.appointmentMainContent{
+    width: calc(100% - 20px)
+}
+
+.appointmentContent {
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.AppointmentsearchBar {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.AppointmentsearchBar input {
+    width: 31%;
+    border: none;
+    border-radius: 2rem;
+    margin-right: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+}
+
+
+/* @media only screen and (max-width: 1350px) {
+    .zoneAppointment .calender{
+        width: 400px;
+        height: 400px;
+        font-size: 16px;
+        padding-top: 20px;
+    }
+} */
+
+
+.appointment-header {
+    /* background-color: #fff; */
+    background-image: linear-gradient(#19D3AE, #0FCFEC);
+    padding: 20px;
+    box-shadow: 0 3px 24px rgba(0, 0, 0, 0.1);
+    border-radius: 3rem;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.appointment-header h1 {
+    font-size: 3rem;
+    font-family: sans-serif;
+    color: #333;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+
+
+@media (max-width: 1200px) {
+    /* .appointment-header {
+        width: 95%;
+    }
+
+    .appointment-header h1 {
+        font-size: 2rem;
+
+    }
+
+    .appointmentContent {
+        width: 95%;
+    }
+    .AppointmentsearchBar {
+        width: 95%;
+    }
+ */
+
+}
+
+@media (max-width: 992px) {
+    /* .appointment-header {
+        width: 70%;
+    } */
+
+    .appointment-header h1 {
+        font-size: 2rem;
+
+    }
+
+    /* .appointmentContent {
+        width: 70%;
+    } */
+
+    .table {
+        overflow-x: auto;
+    }
+    /* .AppointmentsearchBar {
+        width: 70%;
+    } */
+
+
+}
+
+@media (max-width: 768px) {
+
+    /* .appointment-header {
+        width: 60%;
+    } */
+
+    .appointment-header h1 {
+        font-size: 2rem;
+
+    }
+
+    /* .appointmentContent {
+        width: 60%;
+    } */
+
+
+    .appointment-header h1 {
+        font-size: 2rem;
+        font-family: sans-serif;
+        color: #333;
+        text-align: center;
+        margin-bottom: 0;
+    }
+
+    .table {
+        overflow-x: auto;
+    }
+    /* .AppointmentsearchBar {
+        width: 60%;
+    } */
+
+
+
+
+}
+
+@media (max-width: 576px) {
+
+    /* .appointment-header {
+        width: 50%;
+    } */
+
+    .appointment-header h1 {
+        font-size: 1.5rem;
+
+    }
+
+    /* .appointmentContent {
+        width: 50%;
+    } */
+
+    .table {
+        overflow-x: auto;
+    }
+    /* .AppointmentsearchBar {
+        width: 50%;
+    } */
+
+
+
+
+}
+
+@media (max-width: 480px) {
+/* 
+    .appointment-header {
+        width: 40%;
+    } */
+
+    .appointment-header h1 {
+        font-size: 1rem;
+
+    }
+/* 
+    .appointmentContent {
+        width: 40%;
+    } */
+
+    .table {
+        overflow-x: auto;
+    }
+    /* .AppointmentsearchBar {
+        width: 40%;
+    } */
+
+
+
+}

@@ -22,6 +22,7 @@ const AppointmentType = (props) => {
     const [selectedSubcategory, setSelectedSubcategory] = useState('');
     const [loader, setLoader] = useState(false);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [isHomeTest, setIsHomeTest] = useState(false);
 
     const [formData, setformData] = useState({
         date: '',
@@ -30,8 +31,12 @@ const AppointmentType = (props) => {
         phone: '',
         email: '',
         category: '',
-        subcategory: ''
+        subcategory: '',
+        address: '',
+        active:"false"
+
     })
+    console.log(formData, "formmm");
 
     const handlePopupClose = () => {
         setformData({
@@ -42,6 +47,9 @@ const AppointmentType = (props) => {
             email: '',
             category: '',
             subcategory: '',
+            address: '',
+            active:false
+
         });
     };
 
@@ -97,7 +105,7 @@ const AppointmentType = (props) => {
 
     const onSubmit = async () => {
         setLoader(true);
-        const payload = formData;     
+        const payload = formData;
 
         try {
             // First, make the appointment booking API call
@@ -105,6 +113,7 @@ const AppointmentType = (props) => {
                 if (res !== null) {
                     console.log(res, 'app res');
                     try {
+                        return
                         await ApiService.post('/mailappointment', payload, null, (emailRes, emailErr) => {
                             if (emailRes !== null) {
                                 console.log(emailRes, 'app res');
@@ -118,6 +127,8 @@ const AppointmentType = (props) => {
                                     email: '',
                                     category: '',
                                     subcategory: '',
+                                    address: '',
+                                    active:'false'
                                 });
                                 toast.success('Appointment booked successfully');
 
@@ -251,6 +262,35 @@ const AppointmentType = (props) => {
                                                 </div>
                                             )}
                                         </div>
+                                        <br />
+                                        <div className='homeTestContent'>
+                                            <h6 className='homeTestLable'>Home Test :</h6>
+
+                                            <div>
+                                                <input className='homeTestBtn' type='radio' name='isHomeTest' value='false' checked={!isHomeTest} onChange={(e) =>{ setIsHomeTest(false);setformData({...formData,['active']:e.target.value,['address']:""})} }/>
+                                                <label className='homeTestLable' htmlFor='isHomeTestNo'>No</label>
+                                                <input  className='homeTestBtn'type='radio' name='isHomeTest' value='true' checked={isHomeTest} onChange={(e) =>{ setIsHomeTest(true); setformData({...formData,['active']:e.target.value})} }/>
+                                                <label className='homeTestLable' htmlFor='isHomeTestYes'>Yes</label>
+                                            </div>
+                                        </div>
+
+
+                                        {isHomeTest && (
+                                            <div>
+                                                <input
+                                                    type='text'
+                                                    name='address'
+                                                    value={formData.address}
+                                                    placeholder='Enter your Address *'
+                                                    className="takeInput"
+                                                    onChange={(e) => handleFormChange(e)}
+                                                    ref={register({ required: true })}
+                                                />
+                                                <br />
+                                                {errors.address && <span className='validationError'>Address is required *</span>}
+                                            </div>
+
+                                        )}
                                         <p style={{ marginTop: "1rem" }}>If any test is not Available
                                             <br></br>
                                             Contact : {props.profileInformation[0]?.phone}

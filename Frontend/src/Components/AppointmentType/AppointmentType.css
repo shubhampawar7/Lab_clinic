@@ -19,6 +19,16 @@
     width: 10% !important;
 }
 
+.homeTestLable {
+    color: black;
+    margin-right: 1rem;
+}
+
+.homeTestContent {
+    display: flex;
+    justify-content: center;
+}
+
 .appoinementCard {
     width: 18rem;
     border-radius: 1rem;
@@ -36,6 +46,9 @@
     width: 500px;
     border-radius: 10px;
     border: 1px solid gray;
+}
+.homeTestBtn{
+    cursor: pointer;
 }
 
 .validationError {

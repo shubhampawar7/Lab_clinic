@@ -646,8 +646,8 @@ const getAppointment=async(req,res)=>{
 
 const postAppointment=async(req,res)=>{
     try {
-        const { date,time,name,phone ,email,category,subcategory} = req.body;
-        const newAppointment = new Appointment({date,time,name,phone,email,category,subcategory});
+        const { date,time,name,phone ,email,category,subcategory,address,active} = req.body;
+        const newAppointment = new Appointment({date,time,name,phone,email,category,subcategory,address,active});
         await newAppointment.save();
         res.json(newAppointment);
         

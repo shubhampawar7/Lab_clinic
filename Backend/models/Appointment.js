@@ -31,6 +31,12 @@ const labAppointmentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    address: {
+        type: String
+    },
+    active:{
+        type:String
+    }
 })
 
 module.exports=mongoose.model('LabAppointment',labAppointmentSchema)

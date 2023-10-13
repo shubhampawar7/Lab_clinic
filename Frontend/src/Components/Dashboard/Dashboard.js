@@ -14,7 +14,7 @@ const Dashboard = () => {
   const InitialcardData = [
     { id: 1, title: 'Patients', count: 0, image: PatientIcon },
     { id: 2, title: 'Feedback', count: 0, image: Feedback, pageUrl: "/admin/feedback" },
-    { id: 3, title: 'Appoinments', count: 33, image: AppoinmentIcon },
+    { id: 3, title: 'Appoinments', count: 0, image: AppoinmentIcon , pageUrl: "/admin/appointment"},
     { id: 4, title: 'Profile', count: "-", image: Information, pageUrl: "/admin/profile" },
 
 
@@ -22,9 +22,9 @@ const Dashboard = () => {
 
   const [cardData, setCardData] = useState(InitialcardData);
   const [searchQuery, setSearchQuery] = useState('');
-  const filterData = cardData.filter((card) => 
+  const filterData = cardData.filter((card) =>
     card.title.toLowerCase().includes(searchQuery.toLowerCase())
-  
+
   );
   console.log(filterData, 'fff');
   const history = useHistory();
@@ -53,8 +53,26 @@ const Dashboard = () => {
     }
   };
 
+  const getAppointment = async () => {
+    try {
+      ApiService.get('/appointment', null, null, (res, err) => {
+        if (res !== null) {
+          setCardData(prevCardData => prevCardData.map(item =>
+            item.id === 3 ? { ...item, count: res.length } : item
+          ))
+        } else {
+          console.log("getAppointment()", err.message, "error while getAppointment");
+        }
+      });
+    } catch (error) {
+      console.error('Error fetching getAppointment():', error);
+    }
+  };
+
+
   useEffect(() => {
     fetchFeedback();
+    getAppointment();
   }, [])
 
 

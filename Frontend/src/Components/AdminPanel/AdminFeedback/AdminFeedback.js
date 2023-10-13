@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import Sidebar from '../../Sidebar/Sidebar';
-import DeleteIcon from "../../../images/Delete.png";
+import DeleteIcon from "../../../images/DeleteIcon.png";
 import ApiService from '../../../middleware/ApiService';
 import { useHistory } from 'react-router-dom';
 import swal from 'sweetalert';
