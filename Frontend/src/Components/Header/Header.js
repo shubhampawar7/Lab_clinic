@@ -30,6 +30,11 @@ const Header = () => {
                                             </Nav.Link>
                                         </Nav.Item>
                                         <Nav.Item>
+                                            <Nav.Link  href="#services" className="navLink">
+                                                Services
+                                            </Nav.Link>
+                                        </Nav.Item>
+                                        <Nav.Item>
                                             <Nav.Link href="#about" className="navLink">
                                                 About
                                             </Nav.Link>

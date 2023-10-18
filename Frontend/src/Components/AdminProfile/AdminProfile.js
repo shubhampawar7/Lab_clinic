@@ -12,11 +12,11 @@ const AdminProfile = () => {
   const [loader, setLoader] = useState(false);
   const [profileInformation, setProfileInformation] = useState([]);
   const [formData, setFormData] = useState({}); // Store form data in an object
-  console.log(formData, "formdata");
   const [profile, setProfile] = useState({
     shopTiming: [],
   });
 
+  const [InformationEdited, setInformationEdited] = useState(false)
   const [selectedDay, setSelectedDay] = useState(''); // State to store the selected day
   const [openingTime, setOpeningTime] = useState('');
   const [closingTime, setClosingTime] = useState('');
@@ -53,7 +53,8 @@ const AdminProfile = () => {
           // Optionally, you can clear the form fields after successful edit
           setFormData({});
           setLoader(false);
-          getInformation();
+          setInformationEdited(true);
+          // getInformation();
           swal({
             title: 'Information Updated Successfully',
             text: '',
@@ -81,7 +82,7 @@ const AdminProfile = () => {
 
   useEffect(() => {
     getInformation();
-  }, [])
+  }, [InformationEdited])
 
   //shop timing start
   useEffect(() => {
@@ -128,7 +129,7 @@ const AdminProfile = () => {
       <div className='profileMainContent'>
         <h2 style={{ textAlign: "center" }}>Edit Information</h2>
         {
-          profileInformation.map((profile, index) => (
+          profileInformation?.map((profile, index) => (
             <Form key={index} onSubmit={(e) => editInformation(profile._id,e)}>
               <Row>
                 <Col md={12} className='profileForm'>
@@ -173,7 +174,7 @@ const AdminProfile = () => {
                     <div className='shopTimingsMain'>
                       <select value={selectedDay} onChange={handleChangeDay}>
                         <option value="">Select Day</option>
-                        {profile.shopTiming.map((timing) => (
+                        {profile.shopTiming?.map((timing) => (
                           <option key={timing.day} value={timing.day}>
                             {timing.day}
                           </option>

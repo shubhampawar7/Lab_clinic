@@ -3,12 +3,13 @@ import './Footer.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter, faFacebookF, faGooglePlusG } from '@fortawesome/free-brands-svg-icons';
 import { Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 
 const Footer = ({ profileInformation }) => {
     const matches = profileInformation[0]?.address.match(/(Branch \d+:[^]+?)(?=Branch \d+:|$)/g);
     const Address = [matches];
-    console.log(profileInformation[0]?.shopTiming, "pooo");
+
     return (
         <div className="footer">
             <div className='mainFooter'>
@@ -22,7 +23,7 @@ const Footer = ({ profileInformation }) => {
                             {
                                 profileInformation[0]?.shopTiming.map((timing,index) => (
                                     <li key={index}>
-                                        {timing.day}	-  [ {timing.openingTime} Am –  {timing.closingTime} Pm ]
+                                        {timing.day}-  [{timing.openingTime} Am – {timing.closingTime} Pm]
                                     </li>
                                 ))
                             }
@@ -61,9 +62,13 @@ const Footer = ({ profileInformation }) => {
                             <FontAwesomeIcon icon={faTwitter} />
                         </div>
                         <small>Call Now</small>
-                        <p className="callNow">{profileInformation[0]?.phone}</p>
+                        <p className="callNow">
+                            <a href={`tel:+91${profileInformation[0]?.phone}`} style={{ color: "inherit" }}>
+                                {profileInformation[0]?.phone}
+                            </a>
+                        </p>
                         <Nav.Item>
-                            <Nav.Link className="navLink" href="/admin"><h5>Admin</h5></Nav.Link>
+                            <Link className="navLinkAdmin" to="/admin"><h5>Admin</h5></Link>
                         </Nav.Item>
                     </div>
                 </div>

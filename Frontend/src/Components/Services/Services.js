@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock } from '@fortawesome/free-regular-svg-icons';
 import { faMapMarkerAlt, faPhoneAlt, faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
@@ -40,9 +41,16 @@ const Services = ({ profileInformation }) => {
                     <div>
                         <p>Contact us now</p>
                         <small>+91 {profileInformation[0]?.phone}</small><br></br>
-                        <small>{profileInformation[0]?.email}</small>
-
+                        <small>
+                            <a
+                                className="servicesEmail"
+                                href={`mailto:${profileInformation[0]?.email}`}
+                            >
+                                {profileInformation[0]?.email}
+                            </a>
+                        </small>
                     </div>
+
                 </div>
             </div>
             <div className="ourServices">

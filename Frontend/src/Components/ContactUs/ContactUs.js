@@ -8,11 +8,14 @@ const ContactUs = ({ setLoader }) => {
     const [email, setEmail] = useState('');
     const [subject, setSubject] = useState('');
     const [message, setMessage] = useState('');
+    const [number, setNumber] = useState('');
+
+    
 
     const handleContact = async (e) => {
         e.preventDefault();
         setLoader(true);
-        const formData = { email, subject, message };
+        const formData = { email, subject, message,number };
 
         try {
             ApiService.post('/send-email', formData, null, (res, err) => {
@@ -22,6 +25,7 @@ const ContactUs = ({ setLoader }) => {
                     setEmail("");
                     setSubject("");
                     setMessage("");
+                    setNumber("");
                     setLoader(false);
 
                 }
@@ -90,12 +94,20 @@ const ContactUs = ({ setLoader }) => {
                                         />
                                         <br />
                                         <input
+                                            placeholder="Your Phone*"
+                                            type="text"
+                                            value={number}
+                                            onChange={(e) => setNumber(e.target.value)}
+                                            required
+                                        />
+                                        <br />
+                                        <input
                                             placeholder="Your Message*"
                                             type="text"
                                             value={message}
                                             onChange={(e) => setMessage(e.target.value)}
                                             required
-                                        ></input>
+                                        />                                        
                                         <br />
                                         <Button className="submitBtn" type="submit" >
                                             Submit

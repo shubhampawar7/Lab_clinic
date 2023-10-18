@@ -8,6 +8,8 @@ import { toast } from 'react-toastify';
 import SortIcon from "../../images/SortIcon.png";
 import AscIcon from "../../images/AscIcon.png";
 import DesIcon from "../../images/DesIcon.png";
+import {Button } from 'react-bootstrap';
+import * as XLSX from 'xlsx';
 
 
 const AdminLabAppointment = () => {
@@ -15,6 +17,7 @@ const AdminLabAppointment = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [sortField, setSortField] = useState('date'); // Default sorting field
     const [sortOrder, setSortOrder] = useState('asc'); // Default sorting order
+    const [FetchAppointment, setFetchAppointment] = useState(false)
 
     const filteredAppointments = AppointmentData.filter((appointment) => {
         const query = searchQuery.toLowerCase();
@@ -65,7 +68,6 @@ const AdminLabAppointment = () => {
     };
 
     const handleDeleteAppointment = async (data) => {
-        console.log(data,"ddddddddddddsssssssss");
         try {
             swal({
                 title: 'Are you sure?',
@@ -79,15 +81,15 @@ const AdminLabAppointment = () => {
                         await ApiService.post('/deletemailappointment', data, null, (DelemailRes, DelemailErr) => {
 
                             if (res !== null) {
-                                console.log(DelemailRes,"DelemailRes");
                                 toast.error('Appointment deleted successfully');
-                                getAppointment();
+                                setFetchAppointment(true);
+                                // getAppointment();
                             } else {
                                 console.log('handleDeleteAppointment', DelemailErr.message, 'error while deleting Appointment');
                             }
 
                         })
-                      
+
                     });
                 } else {
                     console.log('Appointment canceled');
@@ -100,7 +102,7 @@ const AdminLabAppointment = () => {
 
     useEffect(() => {
         getAppointment();
-    }, []);
+    }, [FetchAppointment]);
 
     const getSortIcon = (field) => {
         if (field === sortField) {
@@ -108,6 +110,15 @@ const AdminLabAppointment = () => {
         }
         return '';
     };
+
+    const handleOnExport=()=>{
+        var wb=XLSX.utils.book_new(),
+        ws=XLSX.utils.json_to_sheet(AppointmentData) ;  //wb-workBook , ws-workSheet
+
+        XLSX.utils.book_append_sheet(wb,ws,"Mysheet");
+        XLSX.writeFile(wb,"AppointmentData.xlsx")
+
+    }
 
     return (
         <div className="mainAppointment">
@@ -120,12 +131,18 @@ const AdminLabAppointment = () => {
                         <h1>Appointments - {AppointmentData.length}</h1>
                     </div>
                     <div className="AppointmentsearchBar">
-                        <input
-                            type="text"
-                            placeholder="Search..."
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                        />
+                        <div>
+                            <Button className="exportBtn" onClick={handleOnExport}>Export to Excel</Button>
+                        </div>
+
+                        <div>
+                            <input
+                                type="text"
+                                placeholder="Search..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                            />
+                        </div>
                     </div>
                     <div className='appointmentContent'>
                         <div class="table-responsive">
@@ -166,7 +183,7 @@ const AdminLabAppointment = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {sortedAppointments.map((appointment, index) => (
+                                    {sortedAppointments?.map((appointment, index) => (
                                         <tr key={index}>
                                             <td>{index + 1}</td>
                                             <td>{appointment.date.split('T')[0]}</td>
