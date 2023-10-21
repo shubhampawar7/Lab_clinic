@@ -18,10 +18,10 @@ const Footer = ({ profileInformation }) => {
                     <div className='footerHeading'>
                         <p>Office Timings</p>
                     </div>
-                    <div >
+                    <div className='timingList'>
                         <ul>
                             {
-                                profileInformation[0]?.shopTiming.map((timing,index) => (
+                                profileInformation[0]?.shopTiming.map((timing, index) => (
                                     <li key={index}>
                                         {timing.day}-  [{timing.openingTime} Am – {timing.closingTime} Pm]
                                     </li>
@@ -39,7 +39,7 @@ const Footer = ({ profileInformation }) => {
                     </div>
                     <div>
                         {
-                            Address[0]?.map((address,index) => (
+                            Address[0]?.map((address, index) => (
                                 <ul key={index}>
                                     <li>{address}</li>
                                 </ul>
