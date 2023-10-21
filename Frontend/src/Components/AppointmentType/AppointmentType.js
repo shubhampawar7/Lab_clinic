@@ -34,7 +34,7 @@ const AppointmentType = (props) => {
         category: '',
         subcategory: '',
         address: '',
-        active:"false"
+        active: "false"
 
     })
     console.log(formData, "formmm");
@@ -49,7 +49,7 @@ const AppointmentType = (props) => {
             category: '',
             subcategory: '',
             address: '',
-            active:false
+            active: false
 
         });
     };
@@ -112,10 +112,7 @@ const AppointmentType = (props) => {
             // First, make the appointment booking API call
             await ApiService.post('/appointment', payload, null, async (res, err) => {
                 if (res !== null) {
-                    console.log(res, 'app res');
-                    setLoader(false)
                     try {
-                        return
                         await ApiService.post('/mailappointment', payload, null, (emailRes, emailErr) => {
                             if (emailRes !== null) {
                                 console.log(emailRes, 'app res');
@@ -130,9 +127,11 @@ const AppointmentType = (props) => {
                                     category: '',
                                     subcategory: '',
                                     address: '',
-                                    active:'false'
+                                    active: 'false'
                                 });
                                 toast.success('Appointment booked successfully');
+                                setLoader(false)
+
 
                             } else {
                                 console.log(emailErr.message, 'error sending email');
@@ -171,8 +170,11 @@ const AppointmentType = (props) => {
 
                         <div className="col-md-12 appointmentType" >
 
-
-                            <Popup trigger={<button>BOOK APPOINTMENT</button>} contentStyle={{ width: "600px", border: "none", background: "transparent" }} modal closeOnDocumentClick
+                            <Popup
+                                trigger={<button>BOOK APPOINTMENT</button>}
+                                contentStyle={{ width: "600px", border: "none", background: "transparent" }}
+                                modal
+                                closeOnDocumentClick
                                 open={isPopupOpen}
                                 onClose={handlePopupClose}
                             >
@@ -269,9 +271,9 @@ const AppointmentType = (props) => {
                                             <h6 className='homeTestLable'>Home Test :</h6>
 
                                             <div>
-                                                <input className='homeTestBtn' type='radio' name='isHomeTest' value='false' checked={!isHomeTest} onChange={(e) =>{ setIsHomeTest(false);setformData({...formData,['active']:e.target.value,['address']:""})} }/>
+                                                <input className='homeTestBtn' type='radio' name='isHomeTest' value='false' checked={!isHomeTest} onChange={(e) => { setIsHomeTest(false); setformData({ ...formData, ['active']: e.target.value, ['address']: "" }) }} />
                                                 <label className='homeTestLable' htmlFor='isHomeTestNo'>No</label>
-                                                <input  className='homeTestBtn'type='radio' name='isHomeTest' value='true' checked={isHomeTest} onChange={(e) =>{ setIsHomeTest(true); setformData({...formData,['active']:e.target.value})} }/>
+                                                <input className='homeTestBtn' type='radio' name='isHomeTest' value='true' checked={isHomeTest} onChange={(e) => { setIsHomeTest(true); setformData({ ...formData, ['active']: e.target.value }) }} />
                                                 <label className='homeTestLable' htmlFor='isHomeTestYes'>Yes</label>
                                             </div>
                                         </div>

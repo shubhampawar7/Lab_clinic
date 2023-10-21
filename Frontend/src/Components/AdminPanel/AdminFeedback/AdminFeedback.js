@@ -12,6 +12,7 @@ import swal from 'sweetalert';
 
 const AdminFeedback = () => {
   const [feedbackData, setFeedbackData] = useState([]);
+  const [FeedbackDeleted, setFeedbackDeleted] = useState(false)
   const [message, setMessage] = useState("")
   const history = useHistory();
 
@@ -44,7 +45,8 @@ const AdminFeedback = () => {
           ApiService.delete(`/feedback/${id}`, null, null, (res, err) => {
             if (res !== null) {
               toast.error('Feedback deleted successfully');
-              fetchFeedback(); 
+              setFeedbackDeleted(true)
+              // fetchFeedback(); 
             } else {
               console.log('handleDeleteFeedback', err.message, 'error while deleting feedback');
             }
@@ -60,7 +62,7 @@ const AdminFeedback = () => {
 
   useEffect(() => {
     fetchFeedback();
-  }, [])
+  }, [FeedbackDeleted])
 
 
 
@@ -87,7 +89,7 @@ const AdminFeedback = () => {
               </tr>
             </thead>
             <tbody>
-              {feedbackData.map((feedback, index) => (
+              {feedbackData?.map((feedback, index) => (
                 <tr key={index}>
                   <td>{index + 1}</td>
                   <td>{feedback.feedback}</td>

@@ -26,7 +26,6 @@ const Dashboard = () => {
     card.title.toLowerCase().includes(searchQuery.toLowerCase())
 
   );
-  console.log(filterData, 'fff');
   const history = useHistory();
 
   const handleNavigate = (pageUrl) => {
@@ -38,7 +37,7 @@ const Dashboard = () => {
     try {
       ApiService.get('/feedback', null, null, (res, err) => {
         if (res !== null) {
-          setCardData(prevCardData => prevCardData.map(item =>
+          setCardData(prevCardData => prevCardData?.map(item =>
             item.id === 2 ? { ...item, count: res.length } : item
           ))
 
@@ -57,7 +56,7 @@ const Dashboard = () => {
     try {
       ApiService.get('/appointment', null, null, (res, err) => {
         if (res !== null) {
-          setCardData(prevCardData => prevCardData.map(item =>
+          setCardData(prevCardData => prevCardData?.map(item =>
             item.id === 3 ? { ...item, count: res.length } : item
           ))
         } else {
@@ -74,6 +73,8 @@ const Dashboard = () => {
     fetchFeedback();
     getAppointment();
   }, [])
+ 
+ 
 
 
   return (
@@ -83,7 +84,7 @@ const Dashboard = () => {
           <Sidebar />
         </div>
         <div className="adminDashboard">
-          <div class="dashboard-header">
+          <div className="dashboard-header">
             <h1>Admin Dashboard</h1>
           </div>
           {/* Search input field */}
@@ -97,7 +98,7 @@ const Dashboard = () => {
           </div>
 
           <div className="row col-md-12 main-card-content">
-            {filterData.map((card, index) => (
+            {filterData?.map((card, index) => (
               <section className="col-3 card-section" key={index} onClick={() => handleNavigate(card.pageUrl)}>
                 <div className="card admin-panel-card mt-2 mb-3">
                   <div className="card-circle mx-auto white">

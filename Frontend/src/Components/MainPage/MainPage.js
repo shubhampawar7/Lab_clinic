@@ -105,10 +105,10 @@ const MainPage = () => {
 
 
                 {/* Blogs Start */}
-                <Blog />
+                {/* <Blog /> */}
 
                 {/* Doctor Section Start */}
-                <div className="ourDoctors">
+                {/* <div className="ourDoctors">
                     <div>
                         <h4>Our Doctors</h4>
                         <div className="ourDoctorsDetails">
@@ -133,7 +133,7 @@ const MainPage = () => {
                             </Card>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 {/* Doctor Section End */}
 
                 <ContactUs setLoader={setLoader} />

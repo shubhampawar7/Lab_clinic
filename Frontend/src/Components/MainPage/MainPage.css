@@ -175,7 +175,7 @@
     width: 23rem;
     margin-left: 100px;
     margin-top: 60px;
-    margin-right: 40px;
+    /* margin-right: 40px; */
 }
 
 .doctorPortal .dentalCare h1 {
@@ -611,6 +611,10 @@
         height: 150px;
         width: 250px;
         margin-top: 40px;
+    }
+    .doctorPortal .dentalCare img {
+        height: 300px;
+        width: auto;
     }
 }
 

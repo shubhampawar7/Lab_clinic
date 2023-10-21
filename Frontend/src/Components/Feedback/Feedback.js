@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import FeedbackIcon from '../../images/FeedbackIcon.png';
 import Loader from '../Global/Loader/Loader';
 import { Button } from '@material-ui/core';
+import "./Feedback.css"
 
 const Feedback = ({ setLoader, loader }) => {
     const [showModal, setShowModal] = useState(false);
@@ -118,9 +119,7 @@ const Feedback = ({ setLoader, loader }) => {
                     <div className="testimonialDetails" >
                         {
                             mainfeedback.map((item, index) => (
-                                <Card key={index} style={{
-                                    width: '21rem', borderRadius: "1rem", filter: "drop-shadow(0 0 0.5rem #555) "
-                                }}>
+                                <Card key={index} className='feedbackCard'>
                                     <Card.Body style={{ textAlign: "center" }}>
                                         <Card.Text>
                                             {item.feedback}

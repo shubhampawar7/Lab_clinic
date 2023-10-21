@@ -11,6 +11,9 @@ const config=require( "../config/config");
 const path = require('path');
 const download = require('download');
 const { fileURLToPath } = require("url");
+// const twilioConfig = require('../config/twilio-config'); // Import Twilio configuration
+// const twilio = require('twilio')(twilioConfig.accountSid, twilioConfig.authToken);
+
 
 // app.use(session({
 //     secret: config.sessionSecret,
@@ -520,16 +523,43 @@ const getFeedback= async (req, res) => {
     }
 }
 
-const addFeedback=async (req, res) => {
+// const addFeedback=async (req, res) => {
+//     try {
+//         const { feedback, name, city } = req.body;
+//         const newFeedback = new Feedback({ feedback, name, city });
+//         await newFeedback.save();
+//         res.json(newFeedback);
+//     } catch (error) {
+//         res.status(500).json({ error: 'Internal server error' });
+//     }
+// }
+
+const addFeedback = async (req, res) => {
     try {
         const { feedback, name, city } = req.body;
         const newFeedback = new Feedback({ feedback, name, city });
         await newFeedback.save();
+
+        // Send an SMS notification to the owner
+        // const ownerPhoneNumber = twilioConfig.ownerPhoneNumber;
+        // const twilioPhoneNumber = twilioConfig.twilioPhoneNumber;
+        // const message = `New feedback received from ${name} in ${city}: ${feedback}`;
+
+        // twilio.messages
+        //     .create({
+        //         body: message,
+        //         from: twilioPhoneNumber,
+        //         to: ownerPhoneNumber,
+        //     })
+        //     .then(message => console.log('SMS notification sent: ' + message.sid))
+        //     .catch(error => console.log('Error sending SMS notification: ' + error.message));
+
         res.json(newFeedback);
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
     }
-}
+};
+
 
 const deleteFeedback = async (req, res) => {
     try {
@@ -679,7 +709,7 @@ const deleteAppointment = async (req, res) => {
 // Appointment End
 
 const sendContactEmail=async(req, res) => {
-    const { email, subject, message } = req.body;
+    const { email, subject, message,number } = req.body;
 
 
     // Create a Nodemailer transporter
@@ -703,10 +733,12 @@ const sendContactEmail=async(req, res) => {
             <p>Contact Information:</p>
             <ul>
                 <li><strong>Email:</strong> ${email}</li>
+                <li><strong>Phone:</strong> ${number}</li>
             </ul>
             
-            <p>Message:</p>
-            <p>${message}</p>
+            <p>Message: <br/>
+                 <p>${message}</p>
+            </p>
             
             <p>Please respond to this message promptly to assist the visitor with their inquiry.</p>
             
@@ -802,16 +834,16 @@ const deletMailAppointment=async (req, res) => {
     const mailOptions = {
         from: config.EMAIL, // Sender's email address
         to: email, // Recipient's email address
-        subject: `Lab Testing Appointment Request Cancelled`, // Email subject
+        subject: ` Request Cancelled For Lab Testing Appointment`, // Email subject
     
         // HTML content of the email
         html: `
             <p>Dear ${name},</p>
             <p>We regret to inform you that your appointment request with Sunrise Diagnostics & Speciality Lab has not been approved or is not possible at this time.</p>
 
-            <p> appointment details:</p>
+            <p> Appointment details:</p>
             <ul>
-                <li><strong>Date:</strong> ${date}</li>
+                <li><strong>Date:</strong> ${date.split('T')[0]}</li>
                 <li><strong>Time:</strong> ${time}</li>
                 <li><strong>Category:</strong> ${category}</li>
                 <li><strong>Subcategory:</strong> ${subcategory}</li>

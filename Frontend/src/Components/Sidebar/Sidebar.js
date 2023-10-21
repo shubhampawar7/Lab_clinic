@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Sidebar.css';
 import FullHeight from "react-full-height";
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTh, faCalendarDay, faUserFriends, faFileAlt, faCog, faSignOutAlt,faBackward } from '@fortawesome/free-solid-svg-icons';
+import { faTh, faCalendarDay, faUserFriends, faFileAlt, faCog, faSignOutAlt, faBackward } from '@fortawesome/free-solid-svg-icons';
 
 
 const Sidebar = () => {
+  
     const handleLogout = () => {
-        localStorage.removeItem('email');
+        localStorage.clear();
     }
+
     return (
         <>
             <FullHeight className="section-sty  les sidebar">
@@ -17,7 +19,7 @@ const Sidebar = () => {
                     <FontAwesomeIcon className="icon" icon={faBackward} />
                     <p>Back</p>
                 </Link>
-                <Link to="/admin" style={{ textDecoration: "none" }} className="sideBarLink">
+                <Link to='/admin/dashboard' style={{ textDecoration: "none" }} className="sideBarLink">
                     <FontAwesomeIcon className="icon" icon={faTh} />
                     <p>Dashboard</p>
                 </Link>
@@ -37,9 +39,9 @@ const Sidebar = () => {
                     <FontAwesomeIcon className="icon" icon={faCog} />
                     <p>Settings</p>
                 </Link>
-                <Link to="" style={{ textDecoration: "none" }} className="sideBarLink">
+                <Link to="/" style={{ textDecoration: "none" }} className="sideBarLink" onClick={handleLogout}>
                     <FontAwesomeIcon className="icon" icon={faSignOutAlt} />
-                    <p onClick={handleLogout}>Log Out</p>
+                    <p >Log Out</p>
                 </Link>
             </FullHeight>
         </>
