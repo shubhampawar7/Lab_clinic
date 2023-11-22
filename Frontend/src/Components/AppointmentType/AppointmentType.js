@@ -10,6 +10,8 @@ import Loader from '../Global/Loader/Loader';
 import { toast } from 'react-toastify';
 import { Button } from '@material-ui/core';
 import bgRemoveDoctor from '../../images/5790-removebg.png';
+import LabTestIcon from '../../images/LabTestIcon.png';
+import CrossIcon from '../../images/CrossIcon.svg';
 
 
 
@@ -24,6 +26,8 @@ const AppointmentType = (props) => {
     const [loader, setLoader] = useState(false);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [isHomeTest, setIsHomeTest] = useState(false);
+    const [contactOnWhatsapp, setContactOnWhatsapp] = useState(false);
+
 
     const [formData, setformData] = useState({
         date: '',
@@ -34,12 +38,14 @@ const AppointmentType = (props) => {
         category: '',
         subcategory: '',
         address: '',
-        active: "false"
+        active: "false",
+        contactOnWhatsapp:"false"
 
     })
     console.log(formData, "formmm");
 
     const handlePopupClose = () => {
+        setIsPopupOpen(false);
         setformData({
             date: '',
             time: '',
@@ -105,13 +111,14 @@ const AppointmentType = (props) => {
 
 
     const onSubmit = async () => {
-        setLoader(true);
+        // setLoader(true);
         const payload = formData;
 
         try {
             // First, make the appointment booking API call
             await ApiService.post('/appointment', payload, null, async (res, err) => {
                 if (res !== null) {
+                    return
                     try {
                         await ApiService.post('/mailappointment', payload, null, (emailRes, emailErr) => {
                             if (emailRes !== null) {
@@ -149,6 +156,9 @@ const AppointmentType = (props) => {
         }
     };
 
+    const handleCancel = () => {
+        setIsPopupOpen(false);
+    }
 
 
 
@@ -159,19 +169,21 @@ const AppointmentType = (props) => {
                 {loader === true && <Loader className="loader-container" visible={loader} />}
 
                 <div>
-                    <img src={bgRemoveDoctor} alt="" />
+                    <img src={LabTestIcon} alt="" />
+                    {/* <img src='https://thumbs.dreamstime.com/z/liquid-pouring-lab-beaker-20520031.jpg?w=576' alt="" /> */}
+
                 </div>
                 <div>
                     <h4>APPOINTMENT</h4>
                     <h1>Make an Appointment <br />Today</h1>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui doloremque dolore ipsa dolorem exercitationem culpa in inventore asperiores nostrum tenetur.</p>
+                    {/* <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui doloremque dolore ipsa dolorem exercitationem culpa in inventore asperiores nostrum tenetur.</p> */}
                     <div className="appoinmentContent container-fluid" >
 
 
                         <div className="col-md-12 appointmentType" >
-
+                            <button onClick={() => setIsPopupOpen(true)}>Book Appointment</button>
                             <Popup
-                                trigger={<button>BOOK APPOINTMENT</button>}
+                                // trigger={<button>BOOK APPOINTMENT</button>}
                                 contentStyle={{ width: "600px", border: "none", background: "transparent" }}
                                 modal
                                 closeOnDocumentClick
@@ -179,8 +191,11 @@ const AppointmentType = (props) => {
                                 onClose={handlePopupClose}
                             >
                                 <div className="popupDetails">
-                                    {/* <h5>{title}</h5> */}
                                     {/* <form onSubmit={(e) => postAppointment(e)}> */}
+                                    <div className='bookingHeader' >
+                                        <h3>Book Appointment</h3>
+                                        <img onClick={handleCancel} className='crossIcon' src={CrossIcon} alt='CrossIcon'></img>
+                                    </div>
                                     <form onSubmit={handleSubmit(onSubmit)}>
                                         <div className='dateTimeField'>
                                             <div className='dateTimeFieldInner'>
@@ -193,9 +208,19 @@ const AppointmentType = (props) => {
                                         </div>
                                         <div style={{ marginBottom: "1.5rem" }}>
                                             <i style={{ color: "black" }}>
-                                                Lab Timing : MON - SAT [ {props.profileInformation[0]?.shopTiming[0]?.openingTime} Am –  {props.profileInformation[0]?.shopTiming[0]?.closingTime} Pm ] --
-                                                SUN [ Closed ]
-                                            </i>
+
+                                                Lab Timing : MON - SAT [
+                                                {props.profileInformation[0]?.shopTiming[0]?.openingTime !== '00:00' ?
+                                                    `${props.profileInformation[0]?.shopTiming[0]?.openingTime} Am – ${props.profileInformation[0]?.shopTiming[6]?.closingTime} Pm` :
+                                                    'Closed'
+                                                }
+                                                ]
+                                                SUN [
+                                                {props.profileInformation[0]?.shopTiming[6]?.openingTime !== '00:00' ?
+                                                    `${props.profileInformation[0]?.shopTiming[6]?.openingTime} Am – ${props.profileInformation[0]?.shopTiming[6]?.closingTime} Pm` :
+                                                    'Closed'
+                                                }
+                                                ]                                            </i>
                                             -
                                             <i></i>
                                         </div>
@@ -268,6 +293,19 @@ const AppointmentType = (props) => {
                                         </div>
                                         <br />
                                         <div className='homeTestContent'>
+                                            <h6 className='homeTestLable'>Contact On Whatsapp :</h6>
+
+                                            <div>
+                                                <input className='homeTestBtn' type='radio' name='contactOnWhatsapp' value='false' checked={!contactOnWhatsapp} onChange={(e) => { setContactOnWhatsapp(false); setformData({ ...formData, ['contactOnWhatsapp']: e.target.value}) }} />
+                                                <label className='homeTestLable' htmlFor='contactOnWhatsappNo'>No</label>
+                                                <input className='homeTestBtn' type='radio' name='contactOnWhatsapp' value='true' checked={contactOnWhatsapp} onChange={(e) => { setContactOnWhatsapp(true); setformData({ ...formData, ['contactOnWhatsapp']: e.target.value }) }} />
+                                                <label className='homeTestLable' htmlFor='contactOnWhatsappYes'>Yes</label>
+                                            </div>
+
+                                         
+                                        </div>
+
+                                        <div className='homeTestContent'>
                                             <h6 className='homeTestLable'>Home Test :</h6>
 
                                             <div>
@@ -276,6 +314,8 @@ const AppointmentType = (props) => {
                                                 <input className='homeTestBtn' type='radio' name='isHomeTest' value='true' checked={isHomeTest} onChange={(e) => { setIsHomeTest(true); setformData({ ...formData, ['active']: e.target.value }) }} />
                                                 <label className='homeTestLable' htmlFor='isHomeTestYes'>Yes</label>
                                             </div>
+
+                                         
                                         </div>
 
 
@@ -297,7 +337,7 @@ const AppointmentType = (props) => {
                                         )}
                                         <p style={{ marginTop: "1rem" }}>If any test is not Available
                                             <br></br>
-                                            Contact : {props.profileInformation[0]?.phone}
+                                            Contact : {props.profileInformation[0]?.phone} / {props.profileInformation[0]?.mobile}
                                         </p>
 
                                         <div className="submitBtn">

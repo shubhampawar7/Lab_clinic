@@ -144,6 +144,17 @@ const AdminProfile = () => {
                     />
                   </Form.Group>
 
+                  <Form.Group className='profileInputForm' controlId="mobile">
+                    <Form.Label>Mobile Number</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="mobile"
+                      placeholder="Enter Mobile number"
+                      value={formData.mobile || profile.mobile}
+                      onChange={(e) => handleChange(e, "mobile")}
+                    />
+                  </Form.Group>
+
                   <Form.Group className='profileInputForm' controlId="address">
                     <Form.Label>Address</Form.Label>
                     <textarea
@@ -170,7 +181,7 @@ const AdminProfile = () => {
                   {/* Shop timing dropdown start */}
 
                   <Form.Group className='profileInputForm' controlId="shopTimings">
-                    <Form.Label>Select Day:</Form.Label>
+                    <Form.Label>Select Day:</Form.Label>Note: 00:00 Means Closed
                     <div className='shopTimingsMain'>
                       <select value={selectedDay} onChange={handleChangeDay}>
                         <option value="">Select Day</option>

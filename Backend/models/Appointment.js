@@ -36,6 +36,9 @@ const labAppointmentSchema = new mongoose.Schema({
     },
     active:{
         type:String
+    },
+    contactOnWhatsapp:{
+        type:String
     }
 })
 

@@ -56,7 +56,7 @@
 
 .footer .callNow {
     background-image: linear-gradient(to right, #19D3AE, #0FCFEC);
-    width: 150px;
+    width: 17rem;
     padding: 10px 10px;
     color: white;
     border-radius: 5px;
@@ -89,7 +89,7 @@
     }
 
     .footer .callNow {
-        width: 100px;
+        width: 12rem;
         padding: 5px 5px;
         font-size: 12px;
         cursor: pointer;

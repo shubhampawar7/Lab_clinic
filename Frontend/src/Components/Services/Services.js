@@ -21,10 +21,21 @@ const Services = ({ profileInformation }) => {
                     <div>
                         <p>Opening Hours</p>
                         <small>
-                            MON - SAT [ {profileInformation[0]?.shopTiming[0]?.openingTime} Am –  {profileInformation[0]?.shopTiming[0]?.closingTime} Pm ]
+                            {/* MON - SAT [ {profileInformation[0]?.shopTiming[0]?.openingTime} Am –  {profileInformation[0]?.shopTiming[0]?.closingTime} Pm ] */}
+                            MON - SAT [
+                            {profileInformation[0]?.shopTiming[0]?.openingTime !== '00:00' ?
+                                `${profileInformation[0]?.shopTiming[0]?.openingTime} Am – ${profileInformation[0]?.shopTiming[6]?.closingTime} Pm` :
+                                'Closed'
+                            }
+                            ]
                             <br />
-                            SUN [ Closed ]
-                        </small>
+
+                            SUN [
+                            {profileInformation[0]?.shopTiming[6]?.openingTime !== '00:00' ?
+                                `${profileInformation[0]?.shopTiming[6]?.openingTime} Am – ${profileInformation[0]?.shopTiming[6]?.closingTime} Pm` :
+                                'Closed'
+                            }
+                            ]                          </small>
                     </div>
                 </div>
                 <div style={{ cursor: "pointer" }} >
@@ -40,7 +51,7 @@ const Services = ({ profileInformation }) => {
                     <FontAwesomeIcon className="icon" icon={faPhoneAlt} />
                     <div>
                         <p>Contact us now</p>
-                        <small>+91 {profileInformation[0]?.phone}</small><br></br>
+                        <small>+91 {profileInformation[0]?.phone} / {profileInformation[0]?.mobile} </small><br></br>
                         <small>
                             <a
                                 className="servicesEmail"

@@ -13,9 +13,7 @@
     flex-wrap: wrap;
 }
 
-.appoinmentContent {
-
-}
+.appoinmentContent {}
 
 .appoinmentHeader {
     display: flex;
@@ -208,6 +206,7 @@
     height: 600px;
     display: flex;
     justify-content: flex-end;
+    /* display: none; */
 }
 
 .doctorPortal .makeAppointment h4 {
@@ -612,11 +611,26 @@
         width: 250px;
         margin-top: 40px;
     }
+
     .doctorPortal .dentalCare img {
         height: 300px;
         width: auto;
     }
+
+    .contactUs-text {
+        width: 100% !important;
+        font-size: 10px !important;
+    }
+
+
+    .contactUs .contactUsDetails input:nth-child(5) {
+        padding: 10px;
+        padding-bottom: 35px;
+    }
+
 }
+
+
 
 .testimonial-header {
     display: flex;
@@ -777,7 +791,8 @@ input[type="text"] {
 .submitBtn:hover {
     /* background-color: #0056b3; */
 }
-.contactContent{
+
+.contactContent {
     display: flex;
     justify-content: center;
 }
@@ -794,5 +809,5 @@ input[type="text"] {
     color: #fffdfd;
     /* Adjust text color as needed */
     text-align: center;
-    width: 50%;
+    width: 100%;
 }

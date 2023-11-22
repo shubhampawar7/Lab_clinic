@@ -63,13 +63,17 @@
 }
 
 .exportBtn {
-    padding: 10px 20px;
+    /* padding: 10px 20px;
     border: none;
     outline: none;
     background-image: linear-gradient(#19D3AE, #0FCFEC);
     color: white;
     font-weight: 700;
-    border-radius: 10px;
+    border-radius: 10px; */
+    width: 4rem;
+    height: 3rem;
+    background-size: cover;
+    cursor: pointer;
 }
 
 /* @media only screen and (max-width: 1350px) {

@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 
 const InformationSchema = new mongoose.Schema({
   phone: String,
+  mobile:String,
   address: String,
   shopTiming: [
     {

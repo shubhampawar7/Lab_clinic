@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import SortIcon from "../../images/SortIcon.png";
 import AscIcon from "../../images/AscIcon.png";
 import DesIcon from "../../images/DesIcon.png";
+import ExcelIcon from "../../images/ExcelIcon.png";
 import {Button } from 'react-bootstrap';
 import * as XLSX from 'xlsx';
 
@@ -132,7 +133,7 @@ const AdminLabAppointment = () => {
                     </div>
                     <div className="AppointmentsearchBar">
                         <div>
-                            <Button className="exportBtn" onClick={handleOnExport}>Export to Excel</Button>
+                            <img className="exportBtn" onClick={handleOnExport} src={ExcelIcon} alt='ExcelIcon'></img>
                         </div>
 
                         <div>
@@ -170,6 +171,9 @@ const AdminLabAppointment = () => {
                                         <th scope="col" onClick={() => handleSort('active')}>
                                             Home Test {getSortIcon('active')}
                                         </th>
+                                        <th scope="col" onClick={() => handleSort('contactOnWhatsapp')}>
+                                            Contact on Whatsapp {getSortIcon('contactOnWhatsapp')}
+                                        </th>
                                         <th scope="col" onClick={() => handleSort('address')}>
                                             Address {getSortIcon('address')}
                                         </th>
@@ -192,6 +196,7 @@ const AdminLabAppointment = () => {
                                             <td>{appointment.phone}</td>
                                             <td>{appointment.email}</td>
                                             <td>{appointment.active}</td>
+                                            <td>{appointment.contactOnWhatsapp}</td>
                                             <td>{appointment.address}</td>
                                             <td>{appointment.category}</td>
                                             <td>{appointment.subcategory}</td>

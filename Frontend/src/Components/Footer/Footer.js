@@ -23,7 +23,11 @@ const Footer = ({ profileInformation }) => {
                             {
                                 profileInformation[0]?.shopTiming.map((timing, index) => (
                                     <li key={index}>
-                                        {timing.day}-  [{timing.openingTime} Am – {timing.closingTime} Pm]
+                                        {timing.openingTime==='00:00' ? (
+                                            `${timing.day}-  [Closed]`
+                                        ) : (
+                                            `${timing.day}-  [${timing.openingTime} Am – ${timing.closingTime} Pm]`
+                                        )}
                                     </li>
                                 ))
                             }
@@ -64,7 +68,7 @@ const Footer = ({ profileInformation }) => {
                         <small>Call Now</small>
                         <p className="callNow">
                             <a href={`tel:+91${profileInformation[0]?.phone}`} style={{ color: "inherit" }}>
-                                {profileInformation[0]?.phone}
+                                +91 {profileInformation[0]?.phone} / {profileInformation[0]?.mobile}
                             </a>
                         </p>
                         <Nav.Item>

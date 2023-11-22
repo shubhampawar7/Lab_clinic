@@ -110,9 +110,9 @@ const Feedback = ({ setLoader, loader }) => {
                                 We look forward to serving you and contributing to your overall well-being.
                             </p>
                             <div className='feedbackBtn'>
-                                <button className="custom-button" onClick={handleModalShow}>
+                                <Button className="custom-button" onClick={handleModalShow}>
                                     Add Feedback
-                                </button>
+                                </Button>
                             </div>
                         </div>
                     </div>

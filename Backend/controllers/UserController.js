@@ -14,7 +14,6 @@ const { fileURLToPath } = require("url");
 // const twilioConfig = require('../config/twilio-config'); // Import Twilio configuration
 // const twilio = require('twilio')(twilioConfig.accountSid, twilioConfig.authToken);
 
-
 // app.use(session({
 //     secret: config.sessionSecret,
 //     resave: false,
@@ -593,8 +592,8 @@ const getInformation=async(req,res)=>{
 const addEditInformation= async (req, res) => {
     try {
         try {
-            const { phone,address,shopTiming,email ,picture} = req.body;
-            const newInfo = new Information({phone, address,shopTiming,email,picture});
+            const { phone,mobile,address,shopTiming,email ,picture} = req.body;
+            const newInfo = new Information({phone,mobile, address,shopTiming,email,picture});
             await newInfo.save();
             res.json(newInfo);
         } catch (error) {
@@ -676,8 +675,8 @@ const getAppointment=async(req,res)=>{
 
 const postAppointment=async(req,res)=>{
     try {
-        const { date,time,name,phone ,email,category,subcategory,address,active} = req.body;
-        const newAppointment = new Appointment({date,time,name,phone,email,category,subcategory,address,active});
+        const { date,time,name,phone ,email,category,subcategory,address,active,contactOnWhatsapp} = req.body;
+        const newAppointment = new Appointment({date,time,name,phone,email,category,subcategory,address,active,contactOnWhatsapp});
         await newAppointment.save();
         res.json(newAppointment);
         

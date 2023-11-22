@@ -3,12 +3,35 @@ import "./Header.css"
 import { Nav, Button, Navbar, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import SunriseIcon from '../../images/SunriseIcon.png';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+// import { Button } from '@material-ui/core';
 
 const Header = () => {
     const [showNav, setShowNav] = useState(false);
 
     const handleNavToggle = () => {
         setShowNav(!showNav);
+    };
+    const images = [
+        'https://plus.unsplash.com/premium_photo-1661284886645-1e21653e252a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+        'https://images.pexels.com/photos/2280571/pexels-photo-2280571.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'https://plus.unsplash.com/premium_photo-1661284886645-1e21653e252a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+
+
+        
+        // Add other image URLs here
+    ];
+
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
     };
 
     return (
@@ -30,7 +53,7 @@ const Header = () => {
                                             </Nav.Link>
                                         </Nav.Item>
                                         <Nav.Item>
-                                            <Nav.Link  href="#services" className="navLink">
+                                            <Nav.Link href="#services" className="navLink">
                                                 Services
                                             </Nav.Link>
                                         </Nav.Item>
@@ -72,10 +95,17 @@ const Header = () => {
                                 {/* </Link> */}
                             </div>
                         </div>
-                        <div className="col-md-7">
-                            <div className="doctorImg">
+                        <div className="col-6">
+                            <Slider {...settings}>
+                                {images.map((image, index) => (
+                                    <div key={index} className="doctorImg">
+                                        <img src={image} alt={`Slide ${index + 1}`} />
+                                    </div>
+                                ))}
+                            </Slider>
+                            {/* <div className="doctorImg">
                                 <img src="https://plus.unsplash.com/premium_photo-1661284886645-1e21653e252a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" width="3rem" height="4rem" alt="" />
-                            </div>
+                            </div> */}
                         </div>
                     </div>        </div>
             </div>

@@ -47,7 +47,8 @@
     border-radius: 10px;
     border: 1px solid gray;
 }
-.homeTestBtn{
+
+.homeTestBtn {
     cursor: pointer;
 }
 
@@ -84,12 +85,38 @@
 
 .popupDetails {
     margin: auto;
-    padding: 40px;
+    /* padding: 40px; */
+    padding: 10px;
     background-color: white;
     border-radius: 20px;
-    width: 700px;
+    /* width: 700px; */
     position: relative;
 }
+
+.bookingHeader {
+    /* display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem; */
+}
+
+.bookingHeader h3 {
+    color: black;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid grey;
+    padding: 5px;
+
+}
+
+.crossIcon {
+    width: 2rem;
+    height: 2rem !important;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+
+}
+
 
 .popupDetails h5 {
     margin-bottom: 30px;
@@ -237,7 +264,8 @@
     .appointmentType button {
         font-size: 11px;
         padding: 8px 10px;
-        margin: 0.2rem;
+        margin: 4rem 0rem;
+
     }
 
 }
