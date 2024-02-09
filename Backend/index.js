@@ -34,7 +34,19 @@ const UserRoute=require("./routes/LoginUser")
 
 
 //------------------
-app.use("/",UserRoute)
+let middlewareExecuted = false;
+
+app.use("/", (req, res, next) => {
+    if (!middlewareExecuted) {
+        console.log("Middleware started");
+        res.json("Middleware started");
+        middlewareExecuted = true;
+    } else {
+        // If the middleware has already executed once, pass control to the next middleware or route handler
+        next();
+    }
+}, UserRoute);
+// app.use("/",UserRoute)
 // app.use("/admin",AdminRoute)
 // app.use("/chats",UserChat)
 
